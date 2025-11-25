@@ -1,6 +1,13 @@
 {
+  "scripts": {
+    "start": "concurrently \"npx tsx --watch backend/server.js\" \"npx tsx --watch frontend/webServer.js\""
+  },
   "dependencies": {
     "node-fetch": "^3.3.2",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "tsx": "^4.20.6"
   }
 }

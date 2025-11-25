@@ -19,7 +19,6 @@ export async function getAllRezepte(req, res) {
 
 export async function getRzeptById(req, res, rezeptId) {
   const rezept = db.prepare("SELECT * FROM rezept WHERE id = ?").get(rezeptId);
-  console.log("rezept: ", rezept);
 
   if (!rezept) {
     res.writeHead(404);
