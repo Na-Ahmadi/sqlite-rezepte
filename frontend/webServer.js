@@ -1,6 +1,8 @@
 import fs from "fs";
 import http from "http";
 import path from "path";
+import Rezepte from "./components/rezepte.html";
+import Zutaten from "./components/zutaten.html";
 
 const PORT = 3006;
 const API_URL = "http://localhost:3005/api/rezepte";
@@ -12,7 +14,7 @@ const server = http.createServer(async (req, res) => {
   try {
     if (req.url === "/style.css") {
       try {
-        const cssPath = path.join(__dirname, "style.css");
+        const cssPath = path.join(__dirname, "public", "style.css");
         const cssData = fs.readFileSync(cssPath, "utf-8");
         res.writeHead(200, { "Content-Type": "text/css" });
         res.end(cssData);
@@ -23,29 +25,15 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    if (req.url === "/api/rezepte" || req.url === "/") {
+    if (req.url === "/") {
       const response = await fetch(API_URL);
       const rezepte = await response.json();
       res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(
-        renderHtml(`
-        <h1>Alle Rezepte</h1>
-        ${rezepte
-          .map(
-            (r) => `
-          <div class="card">
-            <h2><a href="/api/rezepte/${r.id}">${r.titel}</a></h2>
-            <p>${r.beschreibung}</p>
-          </div>
-        `
-          )
-          .join("")}
-      `)
-      );
+      res.end(renderHtml(Rezepte({ rezepte })));
       return;
     }
 
-    const match = req.url.match(/^\/api\/rezepte\/(\d+)$/);
+    const match = req.url.match(/^\/rezepte\/(\d+)$/);
     if (match) {
       const rezeptId = match[1];
       const response = await fetch(`${API_URL}/${rezeptId}`);
@@ -59,37 +47,7 @@ const server = http.createServer(async (req, res) => {
       const data = await response.json();
 
       res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(
-        renderHtml(`
-       <div class="card">
-         <h1>${data.titel}</h1>
-         <p>${data.beschreibung}</p>
-           <div>
-              <span>Erstellt: ${new Date(
-                data.erstellt
-              ).toLocaleDateString()}</span>
-              <span>Aktualisiert: ${new Date(
-                data.aktualisiert
-              ).toLocaleDateString()}</span>
-              <span>Portionen: ${data.portionen}</span>
-            </div>
-            <h3>Zutaten</h3>
-            <ul>
-            ${data.zutaten
-              .map(
-                (z) => `
-              <li>${z.name} - <strong>${z.menge}</strong>${z.einheit} ${
-                  z.optional ? "optional" : ""
-                }</li> 
-              `
-              )
-              .join("")}
-            </ul>
-            <a href="/" class="back-btn">⬅ Zurück</a>
-        </div>
-
-        `)
-      );
+      res.end(renderHtml(Zutaten({ data })));
       return;
     }
 
