@@ -1,0 +1,6 @@
+{
+  "name": "backend",
+  "scripts": {
+    "start": "npx tsx --watch server.js"
+  }
+}
