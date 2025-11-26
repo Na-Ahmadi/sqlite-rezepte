@@ -1,20 +1,20 @@
-export default function Zutaten({data}){
+export default function Zutaten({rezept}){
     return `
        <div class="card">
-         <h1>${data.titel}</h1>
-         <p>${data.beschreibung}</p>
+         <h1>${rezept.titel}</h1>
+         <p>${rezept.beschreibung}</p>
            <div>
               <span>Erstellt: ${new Date(
-                data.erstellt
+                rezept.erstellt
               ).toLocaleDateString()}</span>
               <span>Aktualisiert: ${new Date(
-                data.aktualisiert
+                rezept.aktualisiert
               ).toLocaleDateString()}</span>
-              <span>Portionen: ${data.portionen}</span>
+              <span>Portionen: ${rezept.portionen}</span>
             </div>
             <h3>Zutaten</h3>
             <ul>
-            ${data.zutaten
+            ${rezept.zutaten
               .map(
                 (z) => `
               <li>${z.name} - <strong>${z.menge}</strong>${z.einheit} ${
