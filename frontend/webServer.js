@@ -1,31 +1,36 @@
 import fs from "fs";
 import http from "http";
 import path from "path";
-import Template from "./components/template";
 import Rezepte from "./components/rezepte.html";
+import Template from "./components/template";
 import Zutaten from "./components/zutaten.html";
-
 
 const PORT = 3006;
 const API_URL = "http://localhost:3005/api/rezepte";
 
-
+const mimeTypes = {
+  ".css": "text/css",
+  ".js": "text/javascript",
+  ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".svg": "image/svg+xml",
+  ".html": "text/html",
+  ".json": "application/json",
+};
 
 const server = http.createServer(async (req, res) => {
   try {
-    if (req.url === "/style.css") {
-      try {
-        const cssPath = path.join(__dirname, "public", "style.css");
-        const cssData = fs.readFileSync(cssPath, "utf-8");
-        res.writeHead(200, { "Content-Type": "text/css" });
-        res.end(cssData);
-      } catch (err) {
-        res.writeHead(404);
-        res.end("CSS nicht gefunden");
-      }
+    const publicPath = path.join(__dirname, "public", req.url);
+    if (fs.existsSync(publicPath) && fs.statSync(publicPath).isFile()) {
+      const ext = path.extname(publicPath);
+      const mimeType = mimeTypes[ext] || "application/octet-stream";
+      const fileData = fs.readFileSync(publicPath);
+
+      res.writeHead(200, { "Content-Type": mimeType });
+      res.end(fileData);
       return;
     }
-
     if (req.url === "/") {
       const response = await fetch(API_URL);
       const rezepte = await response.json();
@@ -46,7 +51,6 @@ const server = http.createServer(async (req, res) => {
       }
 
       const rezept = await response.json();
-      console.log('zutaten : ', rezept)
 
       res.writeHead(200, { "Content-Type": "text/html" });
       res.end(Template(Zutaten({ rezept })));
@@ -64,4 +68,3 @@ const server = http.createServer(async (req, res) => {
 server.listen(PORT, () => {
   console.log(`Web-Server läuft auf http://localhost:${PORT}/`);
 });
-
