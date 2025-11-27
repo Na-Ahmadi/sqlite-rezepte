@@ -1,4 +1,4 @@
-const db = require("../db.js");
+import db from "../db.js";
 
 const addZutatenToRezept = (rezept) => {
   const zutaten = db
@@ -17,7 +17,7 @@ export async function getAllRezepte(req, res) {
   res.end(JSON.stringify(rezepte));
 }
 
-export async function getRzeptById(req, res, rezeptId) {
+export async function getRezeptById(req, res, rezeptId) {
   const rezept = db.prepare("SELECT * FROM rezept WHERE id = ?").get(rezeptId);
 
   if (!rezept) {

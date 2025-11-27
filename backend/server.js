@@ -1,5 +1,5 @@
-const http = require("http");
-const rezepteRouter = require("./routes/rezepteRouter");
+import http from "http";
+import rezepteRouter from "./routes/rezepteRouter.js";
 
 const PORT = 3005;
 

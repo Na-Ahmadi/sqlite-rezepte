@@ -1,7 +1,7 @@
-const { DatabaseSync } = require('node:sqlite');
+import { DatabaseSync } from "node:sqlite";
 
-const db = new DatabaseSync('rezepte.db');
+const db = new DatabaseSync("rezepte.db");
 
-console.log('Mit der Rezepte-Datenbank verbunden.');
+console.log("Mit der Rezepte-Datenbank verbunden.");
 
-module.exports = db;
+export default db;

@@ -3,6 +3,7 @@ export default function Rezepte({ rezepte }) {
   <img src="/gemuse-pfanne.jpg" alt="gemuse-pfanne"/>
   <img src="/pfannkuchen.jpg" alt="pfannkuchen" />
   <img src="/spaghetti-mit-bolognese.jpg" alt="spaghetti-mit-bolognese"/>
+  
         <h1>Alle Rezepte</h1>
         ${rezepte
           .map(

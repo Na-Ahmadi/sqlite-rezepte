@@ -21,7 +21,7 @@ const mimeTypes = {
 
 const server = http.createServer(async (req, res) => {
   try {
-    const publicPath = path.join(__dirname, "public", req.url);
+    const publicPath = path.join(__filename, "public", req.url);
     if (fs.existsSync(publicPath) && fs.statSync(publicPath).isFile()) {
       const ext = path.extname(publicPath);
       const mimeType = mimeTypes[ext] || "application/octet-stream";
@@ -31,6 +31,7 @@ const server = http.createServer(async (req, res) => {
       res.end(fileData);
       return;
     }
+
     if (req.url === "/") {
       const response = await fetch(API_URL);
       const rezepte = await response.json();

@@ -1,5 +1,6 @@
 {
   "name": "frontend",
+  "type": "module",
   "scripts": {
     "start": "npx tsx --watch webServer.js"
   }
