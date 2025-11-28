@@ -1,10 +1,10 @@
-export default function Template(content) {
-  return /* HTML */ `
+export default function Template({title, content}) {
+  return /* html */ `
     <!DOCTYPE html>
     <html lang="de">
       <head>
         <meta charset="UTF-8" />
-        <title>Rezepte</title>
+        <title>${title}</title>
         <link rel="stylesheet" href="/style.css" />
       </head>
       <body>

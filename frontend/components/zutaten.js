@@ -1,7 +1,7 @@
 export default function Zutaten({ rezept }) {
   return /* HTML */ `
     <div class="card">
-      <h1>${rezept.titel}</h1>
+      <h1>${rezept.titwel}</h1>
       <p>${rezept.beschreibung}</p>
       <div>
         <span>Erstellt: ${new Date(rezept.erstellt).toLocaleDateString()}</span>
