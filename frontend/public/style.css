@@ -33,3 +33,23 @@ img {
   max-width: 10rem;
   max-height: 5rem;
 }
+
+.error-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  background-color: #f8d7da; 
+  min-height: 80vh; 
+  color: #721c24; 
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.error-page h1 {
+  margin-bottom: 1rem;
+  font-size: 3rem;
+}
