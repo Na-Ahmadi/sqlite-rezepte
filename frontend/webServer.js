@@ -2,6 +2,7 @@ import { promises as fs } from "fs";
 import http from "http";
 import path from "path";
 import { fileURLToPath } from "url";
+import { errorMessage } from "./components/errorMessage";
 import Rezepte from "./components/rezepte";
 import Template from "./components/template";
 import Zutaten from "./components/zutaten";
@@ -56,14 +57,19 @@ const server = http.createServer(async (req, res) => {
     }
 
     const match = rezeptPattern.exec(req.url);
-    console.log("match:", match);
     if (match) {
       const rezeptId = match.pathname.groups.id;
       const response = await fetch(`${API_URL}/${rezeptId}`);
 
       if (response.status === 404) {
         res.writeHead(404);
-        res.end(Template("<h1>Rezept nicht gefunden</h1>"));
+        res.end(
+          Template({
+            title: "Fehler",
+            content: errorMessage("Rezept nicht gefunden"),
+          })
+        );
+
         return;
       }
 
@@ -76,7 +82,12 @@ const server = http.createServer(async (req, res) => {
     }
 
     res.writeHead(404);
-    res.end(Template("<h1>Seite nicht gefunden</h1>"));
+    res.end(
+      Template({
+        title: "Fehler",
+        content: errorMessage("Seite nicht gefunden"),
+      })
+    );
   } catch (err) {
     res.writeHead(500);
     res.end("Serverfehler: " + err.message);
