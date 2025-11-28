@@ -1,5 +1,5 @@
 export default function Rezepte({ rezepte }) {
-  return `
+  return /* html */`
   <img src="/gemuse-pfanne.jpg" alt="gemuse-pfanne"/>
   <img src="/pfannkuchen.jpg" alt="pfannkuchen" />
   <img src="/spaghetti-mit-bolognese.jpg" alt="spaghetti-mit-bolognese"/>
@@ -7,7 +7,7 @@ export default function Rezepte({ rezepte }) {
         <h1>Alle Rezepte</h1>
         ${rezepte
           .map(
-            (r) => `
+            (r) => /* html */ `
           <div class="card">
             <h2><a href="/rezepte/${r.id}">${r.titel}</a></h2>
             <p>${r.beschreibung}</p>
