@@ -7,27 +7,17 @@ const addZutatenToRezept = (rezept) => {
   rezept.zutaten = zutaten;
 };
 
-export async function getAllRezepte(req, res) {
+export function fetchAllRezepte() {
   const rezepte = db.prepare("SELECT * FROM rezept").all();
   for (const rezept of rezepte) {
     addZutatenToRezept(rezept);
   }
-
-  res.writeHead(200, { "Content-Type": "application/json" });
-  res.end(JSON.stringify(rezepte));
+  return rezepte;
 }
 
-export async function getRezeptById(req, res, rezeptId) {
+export function getRezeptById(rezeptId) {
   const rezept = db.prepare("SELECT * FROM rezept WHERE id = ?").get(rezeptId);
-
-  if (!rezept) {
-    res.writeHead(404);
-    res.end("Rezept nicht gefunden");
-    return;
-  }
-
+  if (!rezept) return null;
   addZutatenToRezept(rezept);
-
-  res.writeHead(200, { "Content-Type": "application/json" });
-  res.end(JSON.stringify(rezept));
+  return rezept;
 }
