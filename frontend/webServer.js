@@ -19,10 +19,11 @@ const mimeTypes = {
   ".json": "application/json",
 };
 
+const rezeptPattern = new URLPattern({ pathname: "/rezepte/:id" });
+const rootPatteren = new URLPattern({ pathname: "/" });
+
 const __filename = fileURLToPath(import.meta.url);
-console.log("__filename: ", __filename);
 const __dirname = path.dirname(__filename);
-console.log("__dirname: ", __dirname);
 
 const server = http.createServer(async (req, res) => {
   try {
@@ -43,7 +44,7 @@ const server = http.createServer(async (req, res) => {
       if (err.code !== "ENOENT") throw err;
     }
 
-    if (req.url === "/") {
+    if (rootPatteren.test(req.url)) {
       const response = await fetch(API_URL);
       const rezepte = await response.json();
 
@@ -54,9 +55,10 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    const match = req.url.match(/^\/rezepte\/(\d+)$/);
+    const match = rezeptPattern.exec(req.url);
+    console.log("match:", match);
     if (match) {
-      const rezeptId = match[1];
+      const rezeptId = match.pathname.groups.id;
       const response = await fetch(`${API_URL}/${rezeptId}`);
 
       if (response.status === 404) {
