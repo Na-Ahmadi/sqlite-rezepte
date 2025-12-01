@@ -1,4 +1,4 @@
-export function errorMessage(message) {
+export default function errorMessage({message}) {
   return /* html */ `
   <div class="error-page">
     <h1>${message}</h1>

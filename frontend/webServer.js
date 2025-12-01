@@ -2,7 +2,7 @@ import { promises as fs } from "fs";
 import http from "http";
 import path from "path";
 import { fileURLToPath } from "url";
-import { errorMessage } from "./components/errorMessage";
+import errorMessage from "./components/errorMessage";
 import Rezepte from "./components/rezepte";
 import Template from "./components/template";
 import Zutaten from "./components/zutaten";
@@ -66,7 +66,7 @@ const server = http.createServer(async (req, res) => {
         res.end(
           Template({
             title: "Fehler",
-            content: errorMessage("Rezept nicht gefunden"),
+            content: errorMessage({message: "Rezept nicht gefunden"}),
           })
         );
 
@@ -85,7 +85,7 @@ const server = http.createServer(async (req, res) => {
     res.end(
       Template({
         title: "Fehler",
-        content: errorMessage("Seite nicht gefunden"),
+        content: errorMessage({message: "Seite nicht gefunden"}),
       })
     );
   } catch (err) {
