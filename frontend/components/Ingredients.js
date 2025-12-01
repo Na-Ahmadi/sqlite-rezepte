@@ -1,19 +1,19 @@
-export default function Zutaten({ rezept }) {
+export default function Ingredients({ recipe }) {
   return /* HTML */ `
     <div class="card">
-      <h1>${rezept.titwel}</h1>
-      <p>${rezept.beschreibung}</p>
+      <h1>${recipe.titel}</h1>
+      <p>${recipe.beschreibung}</p>
       <div>
-        <span>Erstellt: ${new Date(rezept.erstellt).toLocaleDateString()}</span>
+        <span>Erstellt: ${new Date(recipe.erstellt).toLocaleDateString()}</span>
         <span
           >Aktualisiert:
-          ${new Date(rezept.aktualisiert).toLocaleDateString()}</span
+          ${new Date(recipe.aktualisiert).toLocaleDateString()}</span
         >
-        <span>Portionen: ${rezept.portionen}</span>
+        <span>Portionen: ${recipe.portionen}</span>
       </div>
       <h3>Zutaten</h3>
       <ul>
-        ${rezept.zutaten
+        ${recipe.zutaten
           .map(
             (z) => /* HTML */ `
               <li>${z.name} - <strong>${z.menge}</strong>${z.einheit} ${
