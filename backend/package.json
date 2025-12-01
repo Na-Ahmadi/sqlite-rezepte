@@ -2,6 +2,6 @@
   "name": "backend",
   "type": "module",
   "scripts": {
-    "start": "npx tsx --watch server.js"
+    "start": "npx tsx --watch apiServer.js"
   }
 }
