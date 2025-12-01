@@ -1,7 +1,7 @@
-import { promises as fs } from "fs";
-import http from "http";
-import path from "path";
-import { fileURLToPath } from "url";
+import { promises as fs } from "node:fs";
+import http from "node:http";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import errorMessage from "./components/ErrorMessage";
 import Recipes from "./components/Recipes";
 import Template from "./components/template";

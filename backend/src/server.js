@@ -1,4 +1,4 @@
-import http from "http";
+import http from "node:http";
 import rezepteRouter from "./routes/rezepteRouter.js";
 
 const PORT = 3005;
