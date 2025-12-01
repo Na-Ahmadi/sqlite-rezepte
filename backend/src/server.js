@@ -12,7 +12,6 @@ const server = http.createServer(async (req, res) => {
 
     res.writeHead(404, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ error: "Endpunkt nicht gefunden" }));
-
   } catch (error) {
     res.writeHead(500, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ error: error.message }));

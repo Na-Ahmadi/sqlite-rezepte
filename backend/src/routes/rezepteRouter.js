@@ -1,13 +1,12 @@
 import {
   fetchAllRezepte,
   getRezeptById,
-} from "../controllers/rezeptController.js";
+} from "../controllers/recipesController";
 
 const alleRezeptePattern = new URLPattern({ pathname: `/api/rezepte` });
 const rezeptByIdPattern = new URLPattern({ pathname: `/api/rezepte/:id` });
 
 export default async function rezepteRouter(req, res) {
-
   if (alleRezeptePattern.test(req.url)) {
     const rezepte = fetchAllRezepte();
     res.writeHead(200, { "Content-Type": "application/json" });
