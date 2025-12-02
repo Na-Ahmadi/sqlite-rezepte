@@ -3,6 +3,9 @@
   "type": "module",
   "scripts": {
     "start": "npx tsx --watch src/server.js"
-    
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "jsdoc": "^4.0.5"
   }
 }
