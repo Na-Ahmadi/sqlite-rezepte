@@ -4,7 +4,7 @@ const addIngredientsToRecipe = (recipe) => {
   const ingredients = db
     .prepare("SELECT * FROM zutaten WHERE rezept_id = ?")
     .all(recipe.id);
-    recipe.ingredients = ingredients;
+  recipe.ingredients = ingredients;
 };
 
 export function fetchAllRecipes() {
