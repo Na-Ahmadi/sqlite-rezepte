@@ -1,3 +1,7 @@
+/**
+ * @param {{ recipe: { id: string; titel: string; beschreibung: string; erstellt: Date; aktualisiert: Date; portionen: number; ingredients: { name: string; menge: number; einheit: string; optional?: boolean }[] } }} props
+ * @returns {string}
+ */
 export default function Ingredients({ recipe }) {
   return /* HTML */ `
     <div class="card">
@@ -16,10 +20,11 @@ export default function Ingredients({ recipe }) {
         ${recipe.ingredients
           .map(
             (i) => /* HTML */ `
-              <li>${i.name} - <strong>${i.menge}</strong>${i.einheit} ${
-              i.optional ? "optional" : ""
-            }</li> 
-              `
+              <li>
+                ${i.name} - <strong>${i.menge}</strong>${i.einheit}
+                ${i.optional ? "optional" : ""}
+              </li>
+            `
           )
           .join("")}
       </ul>

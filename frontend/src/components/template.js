@@ -1,4 +1,8 @@
-export default function Template({title, content}) {
+/**
+ * @param {{title: string; content: string}} props
+ * @returns
+ */
+export default function Template({ title, content }) {
   return /* html */ `
     <!DOCTYPE html>
     <html lang="de">

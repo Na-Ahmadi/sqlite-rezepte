@@ -1,4 +1,8 @@
-export default function errorMessage({message}) {
+/**
+ * @param {{message: string}} props
+ * @returns
+ */
+export default function errorMessage({ message }) {
   return /* html */ `
   <div class="error-page">
     <h1>${message}</h1>
