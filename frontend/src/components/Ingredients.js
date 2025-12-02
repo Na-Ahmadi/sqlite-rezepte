@@ -13,11 +13,11 @@ export default function Ingredients({ recipe }) {
       </div>
       <h3>Zutaten</h3>
       <ul>
-        ${recipe.zutaten
+        ${recipe.ingredients
           .map(
-            (z) => /* HTML */ `
-              <li>${z.name} - <strong>${z.menge}</strong>${z.einheit} ${
-              z.optional ? "optional" : ""
+            (i) => /* HTML */ `
+              <li>${i.name} - <strong>${i.menge}</strong>${i.einheit} ${
+              i.optional ? "optional" : ""
             }</li> 
               `
           )

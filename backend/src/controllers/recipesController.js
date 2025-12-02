@@ -1,23 +1,23 @@
 import db from "../db";
 
-const addZutatenToRezept = (rezept) => {
-  const zutaten = db
+const addIngredientsToRecipe = (recipe) => {
+  const ingredients = db
     .prepare("SELECT * FROM zutaten WHERE rezept_id = ?")
-    .all(rezept.id);
-  rezept.zutaten = zutaten;
+    .all(recipe.id);
+    recipe.ingredients = ingredients;
 };
 
-export function fetchAllRezepte() {
-  const rezepte = db.prepare("SELECT * FROM rezept").all();
-  for (const rezept of rezepte) {
-    addZutatenToRezept(rezept);
+export function fetchAllRecipes() {
+  const recipes = db.prepare("SELECT * FROM rezept").all();
+  for (const recipe of recipes) {
+    addIngredientsToRecipe(recipe);
   }
-  return rezepte;
+  return recipes;
 }
 
-export function getRezeptById(rezeptId) {
-  const rezept = db.prepare("SELECT * FROM rezept WHERE id = ?").get(rezeptId);
-  if (!rezept) return null;
-  addZutatenToRezept(rezept);
-  return rezept;
+export function getRecipeById(rezeptId) {
+  const recipe = db.prepare("SELECT * FROM rezept WHERE id = ?").get(rezeptId);
+  if (!recipe) return null;
+  addIngredientsToRecipe(recipe);
+  return recipe;
 }

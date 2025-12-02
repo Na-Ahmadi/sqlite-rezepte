@@ -4,10 +4,10 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import errorMessage from "./components/ErrorMessage";
 import Recipes from "./components/Recipes";
-import Template from "./components/template";
 import Ingredients from "./components/Ingredients";
+import Template from "./components/template";
 const PORT = 3006;
-const API_URL = "http://localhost:3005/api/rezepte";
+const API_URL = "http://localhost:3005/api/recipes";
 
 const mimeTypes = {
   ".css": "text/css",
@@ -48,11 +48,10 @@ const server = http.createServer(async (req, res) => {
     if (rootPatteren.test(req.url)) {
       const response = await fetch(API_URL);
       const recipes = await response.json();
-      console.log('recipes:', recipes)
 
       res.writeHead(200, { "Content-Type": "text/html" });
       res.end(
-        Template({ title: "Alle Recipes", content: Recipes({ recipes }) })
+        Template({ title: "All Recipes", content: Recipes({ recipes }) })
       );
       return;
     }
@@ -74,7 +73,7 @@ const server = http.createServer(async (req, res) => {
       }
 
       const recipe = await response.json();
-      console.log('recipe: ', recipe);
+      console.log('recipe : ', recipe)
 
       res.writeHead(200, { "Content-Type": "text/html" });
       res.end(Template({ title: recipe.titel, content: Ingredients({ recipe }) }));
