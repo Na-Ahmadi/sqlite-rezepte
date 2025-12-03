@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "target": "esnext",
     "allowJs": true,
     "checkJs": true,
-    "outDir": "./dist",
-    "esModuleInterop": true
+    "outDir": "./dist"
   },
   "exclude": ["node_modules"]
 }
