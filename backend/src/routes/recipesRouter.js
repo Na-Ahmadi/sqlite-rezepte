@@ -1,7 +1,7 @@
 import {
   fetchAllRecipes,
   getRecipeById,
-} from "../controllers/recipesController";
+} from "../data/recipesData";
 
 /**
  * @param {import("http").IncomingMessage} req
