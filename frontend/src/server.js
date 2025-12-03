@@ -5,7 +5,10 @@ import { fileURLToPath } from "node:url";
 import errorMessage from "./components/ErrorMessage";
 import Recipes from "./components/Recipes";
 import Ingredients from "./components/Ingredients";
-import Template from "./components/template";
+import Template from "./components/Template";
+
+
+
 const PORT = 3006;
 const API_URL = "http://localhost:3005/api/recipes";
 
