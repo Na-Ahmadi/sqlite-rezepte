@@ -3,6 +3,11 @@ import {
   getRecipeById,
 } from "../controllers/recipesController";
 
+/**
+ * @param {import("http").IncomingMessage} req
+ * @param {import("http").ServerResponse } res
+ */
+
 const alleRecipesPattern = new URLPattern({ pathname: `/api/recipes` });
 const recipeByIdPattern = new URLPattern({ pathname: `/api/recipes/:id` });
 
