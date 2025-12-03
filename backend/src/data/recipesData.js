@@ -1,9 +1,9 @@
 import db from "./db";
 
 /**
- * @param {{recipe: string}} props
- * @returns {void}
+ * @param {Object} recipe
  */
+
 const addIngredientsToRecipe = (recipe) => {
   const ingredients = db
     .prepare("SELECT * FROM ingredients WHERE recipe_id = ?")
@@ -20,9 +20,7 @@ export function fetchAllRecipes() {
 }
 
 /**
- *
- * @param {recipeId: number} props
- * @returns {object|null}
+ * @param {number|string} recipeId
  */
 
 export function getRecipeById(recipeId) {
