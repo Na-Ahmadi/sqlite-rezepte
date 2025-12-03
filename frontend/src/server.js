@@ -1,7 +1,9 @@
+
 import { promises as fs } from "node:fs";
-import http from "node:http";
-import path from "node:path";
+import { createServer } from "node:http";
+import { dirname, join, extname } from "node:path";
 import { fileURLToPath } from "node:url";
+
 import errorMessage from "./components/ErrorMessage";
 import Recipes from "./components/Recipes";
 import Ingredients from "./components/Ingredients";
@@ -23,20 +25,22 @@ const mimeTypes = {
   ".json": "application/json",
 };
 
+
 const recipePattern = new URLPattern({ pathname: "/recipes/:id" });
 const rootPatteren = new URLPattern({ pathname: "/" });
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
 
-const server = http.createServer(async (req, res) => {
+const server = createServer(async (req, res) => {
   try {
-    const publicPath = path.join(__dirname, "public", req.url);
+    const publicPath = join(__dirname, "..", "public", req.url);
+
 
     try {
       const stats = await fs.stat(publicPath);
       if (stats.isFile()) {
-        const ext = path.extname(publicPath);
+        const ext = extname(publicPath);
         const mimeType = mimeTypes[ext] || "application/octet-stream";
         const fileData = await fs.readFile(publicPath);
 
