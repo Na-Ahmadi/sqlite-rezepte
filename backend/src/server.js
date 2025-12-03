@@ -1,8 +1,7 @@
 import http from "node:http";
 import recipesRouter from "./routes/recipesRouter.js";
 
-const PORT = 3005;
-
+const PORT = process.env.PORT || 3005;
 const server = http.createServer(async (req, res) => {
   try {
     if (req.url.startsWith("/api/recipes")) {
