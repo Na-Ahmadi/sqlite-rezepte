@@ -1,9 +1,10 @@
-import db from "./db";
+import { DatabaseSync } from "node:sqlite";
+
+const db = new DatabaseSync("recipes.db");
 
 /**
  * @param {Object} recipe
  */
-
 const addIngredientsToRecipe = (recipe) => {
   const ingredients = db
     .prepare("SELECT * FROM ingredients WHERE recipe_id = ?")
@@ -22,11 +23,12 @@ export function fetchAllRecipes() {
 /**
  * @param {number|string} recipeId
  */
-
 export function getRecipeById(recipeId) {
   console.log("rezeptId: ", recipeId);
   const recipe = db.prepare("SELECT * FROM recipes WHERE id = ?").get(recipeId);
-  if (!recipe) return null;
+  if (!recipe) {
+    return null;
+  }
   addIngredientsToRecipe(recipe);
   return recipe;
 }
