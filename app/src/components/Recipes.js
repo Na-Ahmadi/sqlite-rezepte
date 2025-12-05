@@ -20,5 +20,6 @@ export default function Recipes({ recipes }) {
           `
     )
     .join("")}
+      <a href="/recipe-form" class="back-btn">Recipe Form</a>
       `;
 }

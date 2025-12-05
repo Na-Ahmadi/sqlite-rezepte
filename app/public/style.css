@@ -42,9 +42,9 @@ img {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border: 1px solid #f5c6cb;
   border-radius: 8px;
-  background-color: #f8d7da; 
-  min-height: 80vh; 
-  color: #721c24; 
+  background-color: #f8d7da;
+  min-height: 80vh;
+  color: #721c24;
   font-family: Arial, sans-serif;
   text-align: center;
 }
@@ -52,4 +52,93 @@ img {
 .error-page h1 {
   margin-bottom: 1rem;
   font-size: 3rem;
+}
+/* --- Form --- */
+
+form {
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  background: #fff;
+  padding: 20px;
+  max-width: 600px;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea {
+  box-sizing: border-box;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  width: 100%;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.ingredient {
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #f0f0f0;
+  padding: 10px;
+}
+
+.ingredient .form-row {
+  display: flex;
+  gap: 2rem;
+}
+.ingredient .form-col {
+  width: fit-content;
+  width: 100%;
+}
+.ingredient input[type="text"],
+.ingredient input[type="number"] {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.ingredient label {
+  display: flex;
+  width: fit-content;
+  font-weight: normal;
+}
+.form-btn-container {
+display: inline;
+}
+
+button {
+  cursor: pointer;
+  margin-top: 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #4CAF50;
+  padding: 10px 15px;
+  color: white;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.back-btn {
+  display: inline-block;
+  margin-top: 20px;
+  color: #555;
+  text-decoration: none;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
 }

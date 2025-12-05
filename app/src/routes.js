@@ -5,6 +5,7 @@ import Ingredients from "./components/Ingredients";
 import Recipes from "./components/Recipes";
 import Template from "./components/Template";
 import { fetchAllRecipes, getRecipeById } from "./data/recipesData";
+import RecipeForm from './components/RecipeForm'
 
 const MIME_TYPES = {
   ".css": "text/css",
@@ -39,6 +40,7 @@ export default [
       if (match && match.pathname.groups.id) {
         const recipeId = match.pathname.groups.id;
         const recipe = getRecipeById(recipeId);
+        console.log('recipes: ',recipe)
 
         if (recipe) {
           res.writeHead(200, { "Content-Type": "application/json" });
@@ -80,6 +82,14 @@ export default [
         }
       }
     },
+  },
+  {
+     pattern: new URLPattern({ pathname: "/recipe-form" }),
+  handler: async (req, res) => {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    res.end(Template({ title: "Create Recipe", content: RecipeForm() }));
+    return true;
+    } 
   },
   // -------------- public folder routes-----------
   {
