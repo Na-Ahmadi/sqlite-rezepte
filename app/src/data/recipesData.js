@@ -7,13 +7,18 @@ const db = new DatabaseSync("recipes.db");
  */
 const addIngredientsToRecipe = (recipe) => {
   const ingredients = db
-    .prepare("SELECT * FROM ingredients WHERE recipe_id = ?")
+    .prepare(
+      "SELECT id, name, quantity, unit, quantity_per_person, optional, recipe_id FROM ingredients WHERE recipe_id = ?"
+    )
     .all(recipe.id);
+  console.log("ingridents", ingredients);
   recipe.ingredients = ingredients;
 };
 
 export function fetchAllRecipes() {
-  const recipes = db.prepare("SELECT * FROM recipes").all();
+  const recipes = db
+    .prepare("SELECT id, title, description FROM recipes")
+    .all();
   for (const recipe of recipes) {
     addIngredientsToRecipe(recipe);
   }
