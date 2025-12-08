@@ -2,10 +2,10 @@ import { readFile, stat } from "node:fs/promises";
 import { extname, join } from "node:path";
 import ErrorMessage from "./components/ErrorMessage";
 import Ingredients from "./components/Ingredients";
+import RecipeForm from "./components/RecipeForm";
 import Recipes from "./components/Recipes";
 import Template from "./components/Template";
 import { fetchAllRecipes, getRecipeById } from "./data/recipesData";
-import RecipeForm from './components/RecipeForm'
 
 const MIME_TYPES = {
   ".css": "text/css",
@@ -35,12 +35,16 @@ export default [
   },
   {
     pattern: new URLPattern({ pathname: `/api/recipes/:id` }),
-    handler: async (req, res, pattern) => {
+    handler: async (
+      /** @type import("http").IncomingMessage */ req,
+      /** @type import("http").ServerResponse  */ res,
+      /** @type {URLPattern} */ pattern
+    ) => {
       const match = pattern.exec(req.url);
       if (match && match.pathname.groups.id) {
         const recipeId = match.pathname.groups.id;
         const recipe = getRecipeById(recipeId);
-        console.log('recipes: ',recipe)
+        console.log("recipes: ", recipe);
 
         if (recipe) {
           res.writeHead(200, { "Content-Type": "application/json" });
@@ -51,9 +55,12 @@ export default [
     },
   },
   // ----------- frontend ------------------
-   {
+  {
     pattern: new URLPattern({ pathname: "/" }),
-    handler: async (req, res) => {
+    handler: async (
+      /** @type {import("http").IncomingMessage} */ req,
+      /** @type {import("http").ServerResponse}  */ res
+    ) => {
       const response = await fetch(API_URL);
       const recipes = await response.json();
 
@@ -66,7 +73,11 @@ export default [
   },
   {
     pattern: new URLPattern({ pathname: "/recipes/:id" }),
-    handler: async (req, res, pattern) => {
+    handler: async (
+      /** @type {import("http").IncomingMessage} */ req,
+      /** @type {import("http").ServerResponse}  */ res,
+      /** @type {URLPattern} */ pattern
+    ) => {
       const match = pattern.exec(req.url);
       if (match) {
         const recipeId = match.pathname.groups.id;
@@ -76,7 +87,7 @@ export default [
 
           res.writeHead(200, { "Content-Type": "text/html" });
           res.end(
-            Template({ title: recipe.titel, content: Ingredients({ recipe }) })
+            Template({ title: recipe.title, content: Ingredients({ recipe }) })
           );
           return true;
         }
@@ -84,12 +95,12 @@ export default [
     },
   },
   {
-     pattern: new URLPattern({ pathname: "/recipe-form" }),
-  handler: async (req, res) => {
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.end(Template({ title: "Create Recipe", content: RecipeForm() }));
-    return true;
-    } 
+    pattern: new URLPattern({ pathname: "/recipe-form" }),
+    handler: async (req, res) => {
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.end(Template({ title: "Create Recipe", content: RecipeForm() }));
+      return true;
+    },
   },
   // -------------- public folder routes-----------
   {

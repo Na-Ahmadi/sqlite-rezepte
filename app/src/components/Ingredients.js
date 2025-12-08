@@ -1,7 +1,23 @@
 /**
- * @param {{ recipe: { id: string; title: string; description: string; created: Date; updated: Date; servings: number; ingredients: { name: string; quantity: number; unit: string; optional?: boolean }[] } }} props
+ * @param {{ 
+ *   recipe: { 
+ *     id: string; 
+ *     title: string; 
+ *     description: string; 
+ *     created: Date; 
+ *     updated: Date; 
+ *     servings: number; 
+ *     ingredients: { 
+ *       name: string; 
+ *       quantity: number; 
+ *       unit: string; 
+ *       optional?: boolean 
+ *     }[] 
+ *   } 
+ * }} props
  * @returns {string}
  */
+
 export default function Ingredients({ recipe }) {
   return /* HTML */ `
     <div class="card">
