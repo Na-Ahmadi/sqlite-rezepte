@@ -11,7 +11,6 @@ const addIngredientsToRecipe = (recipe) => {
       "SELECT id, name, quantity, unit, quantity_per_person, optional, recipe_id FROM ingredients WHERE recipe_id = ?"
     )
     .all(recipe.id);
-  console.log("ingridents", ingredients);
   recipe.ingredients = ingredients;
 };
 
@@ -29,8 +28,8 @@ export function fetchAllRecipes() {
  * @param {number|string} recipeId
  */
 export function getRecipeById(recipeId) {
-  console.log("rezeptId: ", recipeId);
   const recipe = db.prepare("SELECT * FROM recipes WHERE id = ?").get(recipeId);
+  console.log("recipe by id: ", recipe);
   if (!recipe) {
     return null;
   }
