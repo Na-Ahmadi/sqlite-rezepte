@@ -20,6 +20,18 @@ const MIME_TYPES = {
 
 const API_URL = "http://localhost:3006/api/recipes";
 
+/** Send a JSON response */
+function sendJSON(res, data, status = 200) {
+  res.writeHead(200, { "Contetn-Type": "application/json" });
+  res.end(JSON.stringify(data));
+}
+
+/** Send an HTML response */
+function sentHtml(res, htmlContent, status = 200) {
+  res.writeHead(status, { "Content-Type": "text/html" });
+  res.end(htmlContent);
+}
+
 export default [
   {
     pattern: new URLPattern({ pathname: `/api/recipes` }),
@@ -28,8 +40,8 @@ export default [
       /** @type import("http").ServerResponse */ res
     ) => {
       const recipes = fetchAllRecipes();
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify(recipes));
+
+      sendJSON(res, recipes);
       return true;
     },
   },
@@ -44,11 +56,9 @@ export default [
       if (match && match.pathname.groups.id) {
         const recipeId = match.pathname.groups.id;
         const recipe = getRecipeById(recipeId);
-        console.log("recipes: ", recipe);
 
         if (recipe) {
-          res.writeHead(200, { "Content-Type": "application/json" });
-          res.end(JSON.stringify(recipe));
+          sendJSON(res, recipe);
           return true;
         }
       }
@@ -64,8 +74,8 @@ export default [
       const response = await fetch(API_URL);
       const recipes = await response.json();
 
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(
+      sentHtml(
+        res,
         Template({ title: "All Recipes", content: Recipes({ recipes }) })
       );
       return true;
@@ -85,8 +95,8 @@ export default [
         if (response.status === 200) {
           const recipe = await response.json();
 
-          res.writeHead(200, { "Content-Type": "text/html" });
-          res.end(
+          sentHtml(
+            res,
             Template({ title: recipe.title, content: Ingredients({ recipe }) })
           );
           return true;
@@ -97,8 +107,10 @@ export default [
   {
     pattern: new URLPattern({ pathname: "/recipe-form" }),
     handler: async (req, res) => {
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(Template({ title: "Create Recipe", content: RecipeForm() }));
+      sentHtml(
+        res,
+        Template({ title: "Create Recipe", content: RecipeForm() })
+      );
       return true;
     },
   },
@@ -126,8 +138,8 @@ export default [
   {
     pattern: new URLPattern({ pathname: "/*" }),
     handler: async (req, res) => {
-      res.writeHead(404);
-      res.end(
+      sentHtml(
+        res,
         Template({
           title: "Fehler",
           content: ErrorMessage({ message: "Page not found" }),
