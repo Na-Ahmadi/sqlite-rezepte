@@ -16,7 +16,7 @@ const addIngredientsToRecipe = (recipe) => {
 
 export function fetchAllRecipes() {
   const recipes = db
-    .prepare("SELECT id, title, description FROM recipes")
+    .prepare("SELECT id, title, description, updated FROM recipes")
     .all();
   for (const recipe of recipes) {
     addIngredientsToRecipe(recipe);
@@ -40,7 +40,13 @@ export function getRecipeById(recipeId) {
   return recipe;
 }
 
-export function getPostRecipe(title, description, servings, created, updated) {
+export function getPostRecipe({
+  title,
+  description,
+  servings,
+  created,
+  updated,
+}) {
   const stmt = db.prepare(`
     INSERT INTO recipes (title, description, servings, created, updated)
     VALUES (?, ?, ?, ?, ?)
@@ -48,5 +54,3 @@ export function getPostRecipe(title, description, servings, created, updated) {
   const info = stmt.run(title, description, servings, created, updated);
   return info.lastInsertRowid;
 }
-
-

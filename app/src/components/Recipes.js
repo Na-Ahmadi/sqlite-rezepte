@@ -1,5 +1,5 @@
 /**
- * @param {{ recipes: { id: string; title: string; description: string }[] }} props
+ * @param {{ recipes: { id: string; title: string; updated: string; description: string }[] }} props
  * @returns {string}
  */
 
@@ -16,6 +16,7 @@ export default function Recipes({ recipes }) {
           <div class="card">
             <h2><a href="/recipes/${r.id}">${r.title}</a></h2>
             <p>${r.description}</p>
+            <span>${r.updated}</span>
           </div>
           `
     )
