@@ -9,7 +9,7 @@ export default function Recipes({ recipes }) {
   <img src="/pfannkuchen.jpg" alt="pfannkuchen"/>
   <img src="/spaghetti-mit-bolognese.jpg" alt="spaghetti-mit-bolognese"/>
 
-  <h1>All Recipes</h1>
+  <h1>Alle Rezepten</h1>
   ${recipes
     .map(
       (r) => /* html */ `
@@ -20,6 +20,6 @@ export default function Recipes({ recipes }) {
           `
     )
     .join("")}
-      <a href="/recipe-form" class="back-btn">Add Recipe</a>
+      <a href="/recipe-form" class="back-btn">Rezept hinzufügen</a>
       `;
 }

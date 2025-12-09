@@ -2,8 +2,8 @@ export default function RecipeForm() {
   return /* html */ `
   <div class="form-section">
     <div class="form-header">
-      <a href="/" class="back-btn">⬅ Back to recipes</a>
-      <h1 class="form-title">Create a New Recipe</h1>
+      <a href="/" class="back-btn">⬅ Zurück zu den Rezepten</a>
+      <h1 class="form-title">Neues Rezept erstellen</h1>
     </div>
   
     <form id="recipe-form">
@@ -14,22 +14,22 @@ export default function RecipeForm() {
       </div>
 
       <div class="form-row">
-        <label for="description">Description:</label>
+        <label for="description">Beschreibung:</label>
         <textarea id="description" name="description" rows="3" required></textarea>
       </div>
 
       <div class="form-row">
-        <label for="servings">Servings:</label>
+        <label for="servings">Portionen:</label>
         <input type="number" id="servings" name="servings" min="1" required />
       </div>
 
       <div class="form-row">
-        <label for="created">Created:</label>
+        <label for="created">Erstellt:</label>
         <input type="date" id="created" name="created" required />
       </div>
 
       <div class="form-row">
-        <label for="updated">Updated:</label>
+        <label for="updated">Aktualisiert:</label>
         <input type="date" id="updated" name="updated" />
       </div>
 
@@ -65,7 +65,7 @@ export default function RecipeForm() {
       </div> -->
     <div class="form-btn-container">
       <!-- <button type="button" id="add-ingredient">Add Ingredient</button> -->
-      <button type="submit">Save Recipe</button>
+      <button type="submit">Rezept speichern</button>
     </div>
 </form>
 </div>
