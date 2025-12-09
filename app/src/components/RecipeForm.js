@@ -6,7 +6,7 @@ export default function RecipeForm() {
       <h1 class="form-title">Neues Rezept erstellen</h1>
     </div>
   
-    <form id="recipe-form">
+    <form id="recipe-form" action="/new-recipe" method="POST">
       <!-- Recipe Fields -->
       <div class="form-row">
         <label for="title">Title:</label>
@@ -22,7 +22,7 @@ export default function RecipeForm() {
         <label for="servings">Portionen:</label>
         <input type="number" id="servings" name="servings" min="1" required />
       </div>
-
+<!-- 
       <div class="form-row">
         <label for="created">Erstellt:</label>
         <input type="date" id="created" name="created" required />
@@ -31,7 +31,7 @@ export default function RecipeForm() {
       <div class="form-row">
         <label for="updated">Aktualisiert:</label>
         <input type="date" id="updated" name="updated" />
-      </div>
+      </div> -->
 
       <!-- Ingredients Fields -->
       <!-- <h2>Ingredients</h2>

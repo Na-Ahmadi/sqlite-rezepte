@@ -33,10 +33,20 @@ export function getRecipeById(recipeId) {
       "SELECT id, title, description, servings, prep_time, cook_time, total_time, created, updated, instructions  FROM recipes WHERE id = ?"
     )
     .get(recipeId);
-  console.log("recipe by id: ", recipe);
   if (!recipe) {
     return null;
   }
   addIngredientsToRecipe(recipe);
   return recipe;
 }
+
+export function getPostRecipe(title, description, servings, created, updated) {
+  const stmt = db.prepare(`
+    INSERT INTO recipes (title, description, servings, created, updated)
+    VALUES (?, ?, ?, ?, ?)
+  `);
+  const info = stmt.run(title, description, servings, created, updated);
+  return info.lastInsertRowid;
+}
+
+

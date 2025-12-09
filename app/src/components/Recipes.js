@@ -20,6 +20,6 @@ export default function Recipes({ recipes }) {
           `
     )
     .join("")}
-      <a href="/recipe-form" class="back-btn">Rezept hinzufügen</a>
+      <a href="/new-recipe" class="back-btn">Rezept hinzufügen</a>
       `;
 }

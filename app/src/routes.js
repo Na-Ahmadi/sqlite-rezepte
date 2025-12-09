@@ -5,7 +5,11 @@ import Ingredients from "./components/Ingredients";
 import RecipeForm from "./components/RecipeForm";
 import Recipes from "./components/Recipes";
 import Template from "./components/Template";
-import { fetchAllRecipes, getRecipeById } from "./data/recipesData";
+import {
+  fetchAllRecipes,
+  getPostRecipe,
+  getRecipeById,
+} from "./data/recipesData";
 
 const MIME_TYPES = {
   ".css": "text/css",
@@ -19,18 +23,6 @@ const MIME_TYPES = {
 };
 
 const API_URL = "http://localhost:3006/api/recipes";
-
-/** Send a JSON response */
-function sendJSON(res, data, status = 200) {
-  res.writeHead(200, { "Contetn-Type": "application/json" });
-  res.end(JSON.stringify(data));
-}
-
-/** Send an HTML response */
-function sentHtml(res, htmlContent, status = 200) {
-  res.writeHead(status, { "Content-Type": "text/html" });
-  res.end(htmlContent);
-}
 
 export default [
   {
@@ -74,7 +66,7 @@ export default [
       const response = await fetch(API_URL);
       const recipes = await response.json();
 
-      sentHtml(
+      sendHtml(
         res,
         Template({ title: "All Recipes", content: Recipes({ recipes }) })
       );
@@ -95,7 +87,7 @@ export default [
         if (response.status === 200) {
           const recipe = await response.json();
 
-          sentHtml(
+          sendHtml(
             res,
             Template({ title: recipe.title, content: Ingredients({ recipe }) })
           );
@@ -104,10 +96,45 @@ export default [
       }
     },
   },
+
   {
-    pattern: new URLPattern({ pathname: "/recipe-form" }),
-    handler: async (req, res) => {
-      sentHtml(
+    pattern: new URLPattern({ pathname: "/new-recipe" }),
+    handler: async (
+      /** @type {import("http").IncomingMessage} */ req,
+      /** @type {import("http").ServerResponse}  */ res
+    ) => {
+      if (req.method === "POST") {
+        try {
+          const body = await getRequestBody(req);
+          let params;
+          const contentType = req.headers["content-type"];
+          if (contentType?.includes("application/x-www-form-urlencoded")) {
+            params = Object.fromEntries(new URLSearchParams(body));
+          } else if (contentType?.includes("application/json")) {
+            params = JSON.parse(body);
+          } else {
+            res.writeHead(400, { "Content-Type": "text/plain" });
+            res.end("Unsupported Content-Type");
+            return true;
+          }
+
+          let servings = parseInt(params.servings);
+          if (isNaN(servings) || servings < 1) servings = 1;
+
+          const now = new Date().toISOString().split("T")[0];
+
+          getPostRecipe(params.title, params.description, servings, now, now);
+          res.writeHead(302, { Location: "/" });
+          res.end();
+          return true;
+        } catch (err) {
+          res.writeHead(500, { "Content-Type": "text/plain" });
+          res.end("Fehler beim Speichern des Rezepts");
+          return true;
+        }
+      }
+
+      sendHtml(
         res,
         Template({ title: "Create Recipe", content: RecipeForm() })
       );
@@ -138,7 +165,7 @@ export default [
   {
     pattern: new URLPattern({ pathname: "/*" }),
     handler: async (req, res) => {
-      sentHtml(
+      sendHtml(
         res,
         Template({
           title: "Fehler",
@@ -149,3 +176,34 @@ export default [
     },
   },
 ];
+
+/** Send a JSON response */
+function sendJSON(res, data, status = 200) {
+  res.writeHead(200, { "Contetn-Type": "application/json" });
+  res.end(JSON.stringify(data));
+}
+
+/** Send an HTML response */
+function sendHtml(res, htmlContent, status = 200) {
+  res.writeHead(status, { "Content-Type": "text/html" });
+  res.end(htmlContent);
+}
+
+// --- getRequestBody ---
+const getRequestBody = (req) => {
+  return new Promise((resolve, reject) => {
+    let body = "";
+
+    req.on("data", (chunk) => {
+      body += chunk.toString();
+    });
+
+    req.on("end", () => {
+      resolve(body);
+    });
+
+    req.on("error", (err) => {
+      reject(err);
+    });
+  });
+};
