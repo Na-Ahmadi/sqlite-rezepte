@@ -28,7 +28,11 @@ export function fetchAllRecipes() {
  * @param {number|string} recipeId
  */
 export function getRecipeById(recipeId) {
-  const recipe = db.prepare("SELECT * FROM recipes WHERE id = ?").get(recipeId);
+  const recipe = db
+    .prepare(
+      "SELECT id, title, description, servings, prep_time, cook_time, total_time, created, updated, instructions  FROM recipes WHERE id = ?"
+    )
+    .get(recipeId);
   console.log("recipe by id: ", recipe);
   if (!recipe) {
     return null;
