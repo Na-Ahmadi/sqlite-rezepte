@@ -1,19 +1,23 @@
 /**
- * @param {{ 
- *   recipe: { 
- *     id: string; 
- *     title: string; 
- *     description: string; 
- *     created: Date; 
- *     updated: Date; 
- *     servings: number; 
- *     ingredients: { 
- *       name: string; 
- *       quantity: number; 
- *       unit: string; 
- *       optional?: boolean 
- *     }[] 
- *   } 
+ * @param {{
+ *   recipe: {
+ *     id: string;
+ *     title: string;
+ *     description: string;
+ *     created: Date;
+ *     updated: Date;
+ *     servings: number;
+ *     cook_time: number;
+ *     prep_time: number;
+ *     total_time: number;
+ *      instructions: string;
+ *     ingredients: {
+ *       name: string;
+ *       quantity: number;
+ *       unit: string;
+ *       optional?: boolean
+ *     }[]
+ *   }
  * }} props
  * @returns {string}
  */
@@ -24,11 +28,23 @@ export default function Ingredients({ recipe }) {
       <h1>${recipe.title}</h1>
       <p>${recipe.description}</p>
       <div>
-        <span>Erstellt: ${new Date(recipe.created).toLocaleDateString()}</span>
+        <span><strong>Portionen:</strong> ${recipe.servings}</span>
+        <span><strong>Vorbereitungszeit:</strong> ${recipe.prep_time} min</span>
+        <span><strong>Kochzeit:</strong> ${recipe.cook_time} min </span>
+        <span><strong>Gesamtzeit:</strong> ${recipe.total_time} min</span>
+      </div>
+      <br />
+      <div>
         <span
-          >Aktualisiert: ${new Date(recipe.updated).toLocaleDateString()}</span
+          ><strong>Erstellt:</strong> ${new Date(
+            recipe.created
+          ).toLocaleDateString()}</span
         >
-        <span>Portionen: ${recipe.servings}</span>
+        <span
+          ><strong>Aktualisiert:</strong> ${new Date(
+            recipe.updated
+          ).toLocaleDateString()}</span
+        >
       </div>
       <h3>Zutaten</h3>
       <ul>
@@ -43,6 +59,7 @@ export default function Ingredients({ recipe }) {
           )
           .join("")}
       </ul>
+      <div>${recipe.instructions}</div>
       <a href="/" class="back-btn">⬅ Zurück</a>
     </div>
   `;
