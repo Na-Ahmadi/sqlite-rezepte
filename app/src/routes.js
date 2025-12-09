@@ -106,27 +106,28 @@ export default [
       if (req.method === "POST") {
         try {
           const body = await getRequestBody(req);
-          let params;
           const contentType = req.headers["content-type"];
           if (contentType?.includes("application/x-www-form-urlencoded")) {
-            params = Object.fromEntries(new URLSearchParams(body));
-          } else if (contentType?.includes("application/json")) {
-            params = JSON.parse(body);
-          } else {
-            res.writeHead(400, { "Content-Type": "text/plain" });
-            res.end("Unsupported Content-Type");
+            const params = Object.fromEntries(new URLSearchParams(body));
+
+            let servings = parseInt(params.servings);
+            if (isNaN(servings) || servings < 1) {
+              servings = 1;
+            }
+
+            const now = new Date().toISOString().split("T")[0];
+
+            getPostRecipe({
+              title: params.title,
+              description: params.description,
+              servings,
+              created: now,
+              updated: now,
+            });
+            res.writeHead(302, { Location: "/" });
+            res.end();
             return true;
           }
-
-          let servings = parseInt(params.servings);
-          if (isNaN(servings) || servings < 1) servings = 1;
-
-          const now = new Date().toISOString().split("T")[0];
-
-          getPostRecipe(params.title, params.description, servings, now, now);
-          res.writeHead(302, { Location: "/" });
-          res.end();
-          return true;
         } catch (err) {
           res.writeHead(500, { "Content-Type": "text/plain" });
           res.end("Fehler beim Speichern des Rezepts");
@@ -190,7 +191,7 @@ function sendHtml(res, htmlContent, status = 200) {
 }
 
 // --- getRequestBody ---
-const getRequestBody = (req) => {
+function getRequestBody(req) {
   return new Promise((resolve, reject) => {
     let body = "";
 
@@ -206,4 +207,4 @@ const getRequestBody = (req) => {
       reject(err);
     });
   });
-};
+}
