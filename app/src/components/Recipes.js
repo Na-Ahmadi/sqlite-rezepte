@@ -16,7 +16,7 @@ export default function Recipes({ recipes }) {
         <a href="/new-recipe" class="add-btn">Rezept hinzufügen</a>
         <form method="GET" action="/" class="sort-form">
           <label for="sort">Sortieren nach:</label>
-          <select name="sort" id="sort">
+          <select name="sort" id="sort" onchange="this.form.submit()">    
             <option value="">-- wählen --</option>
             <option value="updated_desc">Neuestes zuerst</option>
             <option value="updated_asc">Ältestes zuerst</option>

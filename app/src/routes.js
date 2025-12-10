@@ -31,7 +31,13 @@ export default [
       /** @type import("http").IncomingMessage */ req,
       /** @type import("http").ServerResponse */ res
     ) => {
-      const recipes = fetchAllRecipes();
+      const url = new URL(req.url, "http://localhost:3006");
+      console.log("req.url: ", req.url);
+      console.log("url: ", url);
+      const sort = url.searchParams.get("sort") || "updated_desc";
+      console.log("sort: ", sort);
+      const recipes = fetchAllRecipes(sort);
+      // console.log("recipe: ", recipes);
 
       sendJSON(res, recipes);
       return true;
@@ -63,7 +69,12 @@ export default [
       /** @type {import("http").IncomingMessage} */ req,
       /** @type {import("http").ServerResponse}  */ res
     ) => {
-      const response = await fetch(API_URL);
+      const url = new URL(req.url, "http://localhost:3006");
+      const sort = url.searchParams.get("sort") || "updated_desc";
+
+      const response = await fetch(`${API_URL}?sort=${sort}`);
+
+      // const response = await fetch(API_URL);
       const recipes = await response.json();
 
       sendHtml(
@@ -142,7 +153,7 @@ export default [
       return true;
     },
   },
-  // -------------- public folder routes-----------
+  // ------------- public folder routes -----------
   {
     pattern: new URLPattern({ pathname: "/*" }),
     handler: async (req, res) => {
@@ -179,18 +190,18 @@ export default [
 ];
 
 /** Send a JSON response */
-function sendJSON(res, data, status = 200) {
+function sendJSON(res, data) {
   res.writeHead(200, { "Contetn-Type": "application/json" });
   res.end(JSON.stringify(data));
 }
 
 /** Send an HTML response */
-function sendHtml(res, htmlContent, status = 200) {
-  res.writeHead(status, { "Content-Type": "text/html" });
+function sendHtml(res, htmlContent) {
+  res.writeHead(200, { "Content-Type": "text/html" });
   res.end(htmlContent);
 }
 
-// --- getRequestBody ---
+// -------- getRequestBody --------
 function getRequestBody(req) {
   return new Promise((resolve, reject) => {
     let body = "";
