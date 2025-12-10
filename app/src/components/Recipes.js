@@ -10,7 +10,8 @@ export default function Recipes({ recipes }) {
   <img src="/spaghetti-mit-bolognese.jpg" alt="spaghetti-mit-bolognese"/>
 
   <section class="recipes-wrapper">
-      <h1>Alle Rezepten</h1>
+      <h1>Alle Rezepte</h1>
+
       <header class="recipes-header">
         <a href="/new-recipe" class="add-btn">Rezept hinzufügen</a>
         <form method="GET" action="/" class="sort-form">
@@ -30,10 +31,12 @@ export default function Recipes({ recipes }) {
           .map(
             (r) => /* html */ `
               <article class="recipe-card">
+                <a href="/recipes/${r.id}" class="recipe-link">
                 <image src="/" alt="image"/>
-                <h2><a href="/recipes/${r.id}">${r.title}</a></h2>
+                <h2>${r.title}</h2>
                 <p>${r.description}</p>
                 <span>Aktualisiert: ${r.updated}</span>
+                </a>
               </article>
             `
           )

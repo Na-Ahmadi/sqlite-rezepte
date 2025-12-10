@@ -25,6 +25,10 @@
 export default function Ingredients({ recipe }) {
   return /* HTML */ `
     <article class="recipe-detail">
+      <!-- Zurück Button -->
+      <div class="recipe-back">
+        <a href="/" class="back-btn">⬅ Zurück</a>
+      </div>
       <!-- Header -->
       <header class="recipe-header">
         <h1 class="recipe-title">${recipe.title}</h1>
@@ -63,7 +67,7 @@ export default function Ingredients({ recipe }) {
             .map(
               (i) => `
           <li>
-            ${i.name} - <strong>${i.quantity} ${" "}${i.unit}</strong>
+            ${i.name} <strong>${i.quantity} ${" "}${i.unit}</strong>
             ${i.optional ? "<em>optional</em>" : ""}
           </li>
         `
@@ -77,11 +81,6 @@ export default function Ingredients({ recipe }) {
         <h3>Zubereitung</h3>
         <div>${recipe.instructions}</div>
       </section>
-
-      <!-- Zurück Button -->
-      <div class="recipe-back">
-        <a href="/" class="back-btn">⬅ Zurück</a>
-      </div>
     </article>
   `;
 }
