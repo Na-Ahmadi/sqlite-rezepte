@@ -24,43 +24,64 @@
 
 export default function Ingredients({ recipe }) {
   return /* HTML */ `
-    <div class="card">
-      <h1>${recipe.title}</h1>
-      <p>${recipe.description}</p>
-      <div>
-        <span><strong>Portionen:</strong> ${recipe.servings}</span>
-        <span><strong>Vorbereitungszeit:</strong> ${recipe.prep_time} min</span>
-        <span><strong>Kochzeit:</strong> ${recipe.cook_time} min </span>
-        <span><strong>Gesamtzeit:</strong> ${recipe.total_time} min</span>
+    <article class="recipe-detail">
+      <!-- Header -->
+      <header class="recipe-header">
+        <h1 class="recipe-title">${recipe.title}</h1>
+        <p class="recipe-description">${recipe.description}</p>
+      </header>
+
+      <!-- Meta Infos -->
+      <section class="recipe-meta">
+        <div class="meta-times">
+          <span><strong>Portionen:</strong> ${recipe.servings}</span>
+          <span
+            ><strong>Vorbereitungszeit:</strong> ${recipe.prep_time} min</span
+          >
+          <span><strong>Kochzeit:</strong> ${recipe.cook_time} min</span>
+          <span><strong>Gesamtzeit:</strong> ${recipe.total_time} min</span>
+        </div>
+        <div class="meta-dates">
+          <span
+            ><strong>Erstellt:</strong> ${new Date(
+              recipe.created
+            ).toLocaleDateString()}</span
+          >
+          <span
+            ><strong>Aktualisiert:</strong> ${new Date(
+              recipe.updated
+            ).toLocaleDateString()}</span
+          >
+        </div>
+      </section>
+
+      <!-- Zutaten -->
+      <section class="recipe-ingredients">
+        <h3>Zutaten</h3>
+        <ul>
+          ${recipe.ingredients
+            .map(
+              (i) => `
+          <li>
+            ${i.name} - <strong>${i.quantity} ${" "}${i.unit}</strong>
+            ${i.optional ? "<em>optional</em>" : ""}
+          </li>
+        `
+            )
+            .join("")}
+        </ul>
+      </section>
+
+      <!-- Anweisungen -->
+      <section class="recipe-instructions">
+        <h3>Zubereitung</h3>
+        <div>${recipe.instructions}</div>
+      </section>
+
+      <!-- Zurück Button -->
+      <div class="recipe-back">
+        <a href="/" class="back-btn">⬅ Zurück</a>
       </div>
-      <br />
-      <div>
-        <span
-          ><strong>Erstellt:</strong> ${new Date(
-            recipe.created
-          ).toLocaleDateString()}</span
-        >
-        <span
-          ><strong>Aktualisiert:</strong> ${new Date(
-            recipe.updated
-          ).toLocaleDateString()}</span
-        >
-      </div>
-      <h3>Zutaten</h3>
-      <ul>
-        ${recipe.ingredients
-          .map(
-            (i) => /* HTML */ `
-              <li>
-                ${i.name} - <strong>${i.quantity}</strong>${i.unit}
-                ${i.optional ? "optional" : ""}
-              </li>
-            `
-          )
-          .join("")}
-      </ul>
-      <div>${recipe.instructions}</div>
-      <a href="/" class="back-btn">⬅ Zurück</a>
-    </div>
+    </article>
   `;
 }
