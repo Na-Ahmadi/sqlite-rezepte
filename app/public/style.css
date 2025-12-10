@@ -147,3 +147,46 @@ button {
 button:hover {
   background-color: #45a049;
 }
+
+/* ---sort-form---- */
+
+.sort-form {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.sort-form label {
+  margin: 0;
+  color: #333;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.sort-form select {
+  appearance: none; /* Schönere Darstellung */
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  padding: 8px 12px;
+  padding-right: 35px;
+  font-size: 14px;
+}
+
+.sort-form select:hover {
+  border-color: #888;
+}
+
+.sort-form select:focus {
+  outline: none;
+  box-shadow: 0 0 3px rgba(59, 130, 246, 0.6);
+  border-color: #3b82f6;
+}
