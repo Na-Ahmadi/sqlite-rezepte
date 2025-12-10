@@ -1,7 +1,8 @@
 body {
-  margin: 0;
+  margin: 0 auto;
   background: #f5f5f5;
   padding: 20px;
+  max-width: 1200px;
   font-family: Arial, sans-serif;
 }
 
@@ -15,24 +16,33 @@ body {
 
 /* Einzelne Recipe Card */
 .recipe-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border: 1px solid #ddd;
   border-radius: 8px;
   background: white;
-  padding: 15px;
 }
 
 .recipe-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
+/* Links */
+.recipe-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  margin: 0;
+  padding: 15px;
+  height: -webkit-fill-available;
+  color: #555;
+  text-decoration: none;
+}
 
 .recipe-card h2 {
   margin-bottom: 10px;
+  color: #007bff;
   font-size: 18px;
 }
 
@@ -45,16 +55,6 @@ body {
 .recipe-card .updated {
   color: #888;
   font-size: 12px;
-}
-
-/* Links */
-a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
 }
 
 img {
@@ -161,16 +161,16 @@ img {
   font-size: 14px;
 }
 
-.recipe-meta span {
-  display: block;
-}
-
-/* Optional: kleine Boxen für Meta */
-.meta-times span,
-.meta-dates span {
+.meta-times,
+.meta-dates {
   border-radius: 6px;
   background-color: #f1f5f8;
   padding: 6px 10px;
+}
+
+.recipe-meta span {
+  display: block;
+  margin-bottom: 5px;
 }
 
 .recipe-ingredients {
