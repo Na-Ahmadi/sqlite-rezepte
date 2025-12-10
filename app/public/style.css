@@ -263,9 +263,14 @@ img {
 }
 
 .recipes-wrapper > h1 {
-  margin: 0 auto;
+  position: relative;
+  margin-bottom: 30px;
+  color: #2c3e50;
   font-weight: bold;
-  font-size: 24px;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  letter-spacing: 1px;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 /* ------ Sortierformular --------- */
@@ -294,7 +299,8 @@ img {
   background-color: #fff;
   padding: 8px 12px;
   padding-right: 35px;
-  font-size: 14px;
+  width: 14rem;
+  font-size: 15px;
 }
 
 @media (max-width: 700px) {
