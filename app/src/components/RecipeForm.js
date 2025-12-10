@@ -65,7 +65,7 @@ export default function RecipeForm() {
       </div> -->
     <div class="form-btn-container">
       <!-- <button type="button" id="add-ingredient">Add Ingredient</button> -->
-      <button type="submit">Rezept speichern</button>
+      <button type="submit" class="submit-btn">Rezept speichern</button>
     </div>
 </form>
 </div>
