@@ -14,11 +14,16 @@ const addIngredientsToRecipe = (recipe) => {
   recipe.ingredients = ingredients;
 };
 
+const sortOptions = {
+  updated_desc: "updated DESC",
+  updated_asc: "updated ASC",
+  title_asc: "title ASC",
+  title_desc: "title DESC",
+};
+
 export function fetchAllRecipes(sort = "updated_desc") {
-  let orderBy = "updated DESC";
-  if (sort === "updated_asc") orderBy = "updated ASC";
-  if (sort === "title_asc") orderBy = "title ASC";
-  if (sort === "title_desc") orderBy = "title DESC";
+  const orderBy = sortOptions[sort] || sortOptions.updated_desc;
+
   const recipes = db
     .prepare(
       `SELECT id, title, description, updated FROM recipes ORDER BY ${orderBy}`

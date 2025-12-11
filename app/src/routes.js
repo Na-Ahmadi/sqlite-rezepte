@@ -32,12 +32,8 @@ export default [
       /** @type import("http").ServerResponse */ res
     ) => {
       const url = new URL(req.url, "http://localhost:3006");
-      console.log("req.url: ", req.url);
-      console.log("url: ", url);
       const sort = url.searchParams.get("sort") || "updated_desc";
-      console.log("sort: ", sort);
       const recipes = fetchAllRecipes(sort);
-      // console.log("recipe: ", recipes);
 
       sendJSON(res, recipes);
       return true;
@@ -73,8 +69,6 @@ export default [
       const sort = url.searchParams.get("sort") || "updated_desc";
 
       const response = await fetch(`${API_URL}?sort=${sort}`);
-
-      // const response = await fetch(API_URL);
       const recipes = await response.json();
 
       sendHtml(
@@ -201,7 +195,7 @@ function sendHtml(res, htmlContent) {
   res.end(htmlContent);
 }
 
-// -------- getRequestBody --------
+// -------- getRequestBody ---------
 function getRequestBody(req) {
   return new Promise((resolve, reject) => {
     let body = "";
