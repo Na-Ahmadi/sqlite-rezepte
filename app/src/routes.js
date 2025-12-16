@@ -6,6 +6,7 @@ import RecipeForm from "./components/RecipeForm";
 import Recipes from "./components/Recipes";
 import Template from "./components/Template";
 import {
+  deleteRecipeById,
   fetchAllRecipes,
   getPostRecipe,
   getRecipeById,
@@ -34,7 +35,6 @@ export default [
       const url = new URL(req.url, "http://localhost:3006");
       const sort = url.searchParams.get("sort") || "updated_desc";
       const recipes = fetchAllRecipes(sort);
-
       sendJSON(res, recipes);
       return true;
     },
@@ -114,7 +114,10 @@ export default [
           const contentType = req.headers["content-type"];
           if (contentType?.includes("application/x-www-form-urlencoded")) {
             const params = Object.fromEntries(new URLSearchParams(body));
-
+            console.log(
+              "Form params:",
+              new URLSearchParams(body).getAll("name")
+            );
             let servings = parseInt(params.servings);
             if (isNaN(servings) || servings < 1) {
               servings = 1;
@@ -145,6 +148,28 @@ export default [
         Template({ title: "Create Recipe", content: RecipeForm() })
       );
       return true;
+    },
+  },
+  {
+    pattern: new URLPattern({ pathname: "/delete-recipe/:id" }),
+    handler: async (
+      /** @type {import("http").IncomingMessage} */ req,
+      /** @type {import("http").ServerResponse} */ res,
+      /** @type {URLPattern} */ pattern
+    ) => {
+      if (req.method === "POST") {
+        const match = pattern.exec(req.url);
+        if (match) {
+          const recipeId = match.pathname.groups.id;
+          deleteRecipeById(recipeId);
+
+          console.log(`✅ Rezept mit ID ${recipeId} wurde gelöscht!`);
+
+          res.writeHead(302, { location: "/" });
+          res.end();
+          return true;
+        }
+      }
     },
   },
   // ------------- public folder routes -----------

@@ -107,10 +107,12 @@ img {
   display: inline-block;
   transition: background 0.2s ease;
   margin-top: 20px;
+  border: none;
   border-radius: 5px;
   background: #007bff;
   padding: 10px 15px;
   color: white;
+  font-weight: bold;
   text-decoration: none;
 }
 .back-btn,

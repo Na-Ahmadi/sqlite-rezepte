@@ -34,7 +34,7 @@ export default function RecipeForm() {
       </div> -->
 
       <!-- Ingredients Fields -->
-      <!-- <h2>Ingredients</h2>
+      <h2>Ingredients</h2>
       <div id="ingredients-container">
         <div class="ingredient">
           <div class="form-row">
@@ -43,17 +43,17 @@ export default function RecipeForm() {
               <input type="text" id="ingredient-0-name" name="name" placeholder="Name" required />
             </div>
             <div class="form-col">
-              <label for="ingredient-0-quantity">Quantity:</label>
+              <label for="ingredient-0-quantity">Menge:</label>
               <input type="number" id="ingredient-0-quantity" name="quantity" placeholder="Quantity" required />
             </div>
           </div>
           <div class="form-row">
             <div class="form-col">
               <label for="ingredient-0-unit">Unit:</label>
-              <input type="text" id="ingredient-0-unit" name="unit" placeholder="Unit" required />
+              <input type="text" id="ingredient-0-unit" name="unit" placeholder="Einheit" required />
             </div>
             <div class="form-col">
-              <label for="ingredient-0-per-person">Qty per person:</label>
+              <label for="ingredient-0-per-person">Menge pro Person:</label>
               <input type="number" id="ingredient-0-per-person" name="quantity_per_person" placeholder="Qty per person" required />
             </div>
           </div>
@@ -62,8 +62,9 @@ export default function RecipeForm() {
             <input type="checkbox" id="ingredient-0-optional" name="optional" />
           </div>
         </div>
-      </div> -->
-    <div class="form-btn-container">
+      </div>
+      </div>
+      <div class="form-btn-container">
       <!-- <button type="button" id="add-ingredient">Add Ingredient</button> -->
       <button type="submit" class="submit-btn">Rezept speichern</button>
     </div>

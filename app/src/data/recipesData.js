@@ -65,3 +65,8 @@ export function getPostRecipe({
   const info = stmt.run(title, description, servings, created, updated);
   return info.lastInsertRowid;
 }
+
+export function deleteRecipeById(recipeId) {
+  const stm = db.prepare(`DELETE FROM recipes WHERE id = ? `);
+  stm.run(recipeId);
+}
