@@ -81,9 +81,22 @@ export default function Ingredients({ recipe }) {
         <h3>Zubereitung</h3>
         <div>${recipe.instructions}</div>
       </section>
-      <form method="POST" action="/delete-recipe/${recipe.id}">
+      <!-- Löschen Button -->
+      <form
+        method="POST"
+        action="/delete-recipe/${recipe.id}"
+        class="delete-form"
+        onsubmit="return confirmDelete()"
+      >
         <button type="submit" class="delete-btn">Rezept löschen</button>
       </form>
     </article>
+
+    <script>
+      function confirmDelete() {
+        // Popup: Yes → true, Cancel → false
+        return confirm("Möchten Sie dieses Rezept wirklich löschen?");
+      }
+    </script>
   `;
 }

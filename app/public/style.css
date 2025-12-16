@@ -115,10 +115,15 @@ img {
   font-weight: bold;
   text-decoration: none;
 }
-.back-btn,
-.delete-btn {
+.back-btn {
   &:hover {
     background-color: #0056b3;
+  }
+}
+.delete-btn {
+  background-color: #dc3545;
+  &:hover {
+    background: #c82333;
   }
 }
 .add-btn {
@@ -250,6 +255,10 @@ img {
   .recipe-instructions div {
     padding: 12px 15px;
   }
+}
+
+.delete-form {
+  text-align: right;
 }
 
 /* --------------- header---------------- */
