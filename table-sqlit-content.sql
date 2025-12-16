@@ -79,8 +79,10 @@ INSERT INTO zutaten (name, menge, einheit, menge_pro_person, optional, rezept_id
 ('Eier', 4, 'Stück', 1, 0, 3),
 ('Salz', 1, 'Prise', 0.25, 0, 3),
 ('Zucker', 2, 'EL', 0.5, 1, 3), 
-('Butter', 20, 'g', 5, 1, 3);   
--- ------------------------------------
+('Butter', 20, 'g', 5, 1, 3);  
+
+
+/* ----------------- Recipe Table in englisch---------------------*/
 CREATE TABLE recipes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
