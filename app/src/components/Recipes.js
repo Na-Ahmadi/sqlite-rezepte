@@ -1,27 +1,27 @@
 /**
- * @param {{ recipes: { id: string; title: string; updated: string; description: string }[] }} props
+ * @param {{ recipes: { id: string; title: string; updated: string; sort: string,  description: string }[]; sort: string }} props
  * @returns {string}
  */
 
-export default function Recipes({ recipes }) {
+export default function Recipes({ recipes, sort = "" }) {
   return /* html */ `
-  <img src="/gemuse-pfanne.jpg" alt="gemuse-pfanne"/>
+  <!-- <img src="/gemuse-pfanne.jpg" alt="gemuse-pfanne"/>
   <img src="/pfannkuchen.jpg" alt="pfannkuchen"/>
-  <img src="/spaghetti-mit-bolognese.jpg" alt="spaghetti-mit-bolognese"/>
+  <img src="/spaghetti-mit-bolognese.jpg" alt="spaghetti-mit-bolognese"/> -->
 
   <section class="recipes-wrapper">
       <h1>Alle Rezepte</h1>
-
       <header class="recipes-header">
         <a href="/new-recipe" class="add-btn">Rezept hinzufügen</a>
-        <form method="GET" action="/" class="sort-form">
+
+        <form method="GET" class="sort-form">
           <label for="sort">Sortieren nach:</label>
           <select name="sort" id="sort" onchange="this.form.submit()">    
             <option value="">-- wählen --</option>
-            <option value="updated_desc">Neuestes zuerst</option>
-            <option value="updated_asc">Ältestes zuerst</option>
-            <option value="title_asc">Titel A–Z</option>
-            <option value="title_desc">Titel Z–A</option>
+            <option value= "updated_desc">Neuestes zuerst</option>
+            <option value= "updated_asc">Ältestes zuerst</option>
+            <option value= "title_asc">Titel A–Z</option>
+            <option value= "title_desc">Titel Z–A</option>           
           </select>
         </form>
       </header>
@@ -43,6 +43,20 @@ export default function Recipes({ recipes }) {
           .join("")}
       </div>
     </section>
+
+        <script>
+        const select = document.getElementById('sort');
+
+        select.addEventListener('change', function () {
+          localStorage.setItem('sort', this.value);
+          this.form.submit();
+        });
+
+        const savedSort = localStorage.getItem('sort');
+        if (savedSort) {
+          select.value = savedSort;
+        }
+        </script>
 
       `;
 }
