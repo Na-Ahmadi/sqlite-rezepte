@@ -53,64 +53,61 @@ export default function RecipeForm() {
           </div>
         </div>
       </div>
-      <div class="ingredient-buttons">
+      <div class="form-row ingredient-buttons">
         <button type="button" id="add-ingredient" class="add-ingredient" onclick="addIngredient()">Add +</button>  
-        <button type="button" class="remove-ingredient" onclick="removeIngredient()">Remove</button>
       </div>
       <!-- Submit Button -->
       <div class="form-btn-container">
         <button type="submit" class="submit-btn">Rezept speichern</button>
       </div>
     </div>
-</form>
-</div>
+  </form>
+  </div>
 
-
-<!-- JavaScript for dynamic ingredient fields -->
-<script>
-  function addIngredient(){
-    const container = document.getElementById('ingredients-container');
-    const index = container.children.length;
-    const ingredientDiv = document.createElement('div');
-    ingredientDiv.className = 'ingredient';
-    ingredientDiv.innerHTML = \`
-        <div class="form-row">
-          <div class="form-col">
-            <label for="ingredient-\${index}-name">Name:</label>
-            <input type="text" id="ingredient-\${index}-name" name="name" placeholder="Name" required />
+  <!-- JavaScript for dynamic ingredient fields -->
+  <script>
+    function addIngredient(){
+      const container = document.getElementById('ingredients-container');
+      const index = container.children.length;
+      const ingredientDiv = document.createElement('div');
+      ingredientDiv.className = 'ingredient';
+      ingredientDiv.innerHTML = \`
+          <div class="form-row">
+            <div class="form-col">
+              <label for="ingredient-\${index}-name">Name:</label>
+              <input type="text" id="ingredient-\${index}-name" name="name" placeholder="Name" required />
+            </div>
+            <div class="form-col">
+              <label for="ingredient-\${index}-quantity">Menge:</label>
+              <input type="number" id="ingredient-\${index}-quantity" name="quantity" placeholder="Menge" required />
+            </div>
           </div>
-          <div class="form-col">
-            <label for="ingredient-\${index}-quantity">Menge:</label>
-            <input type="number" id="ingredient-\${index}-quantity" name="quantity" placeholder="Menge" required />
+          <div class="form-row">
+            <div class="form-col">
+              <label for="ingredient-\${index}-unit">Einheit:</label>
+              <input type="text" id="ingredient-\${index}-unit" name="unit" placeholder="Einheit" required />
+            </div>
+            <div class="form-col">
+              <label for="ingredient-\${index}-per-person">Menge pro Person:</label>
+              <input type="number" id="ingredient-\${index}-per-person" name="quantity_per_person" placeholder="Menge pro Person" required />
+            </div>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="form-col">
-            <label for="ingredient-\${index}-unit">Einheit:</label>
-            <input type="text" id="ingredient-\${index}-unit" name="unit" placeholder="Einheit" required />
+          <div class="form-row optional">
+            <label for="ingredient-\${index}-optional">Optional:</label>
+            <input type="checkbox" id="ingredient-\${index}-optional" name="optional" />
           </div>
-          <div class="form-col">
-            <label for="ingredient-\${index}-per-person">Menge pro Person:</label>
-            <input type="number" id="ingredient-\${index}-per-person" name="quantity_per_person" placeholder="Menge pro Person" required />
-          </div>
-        </div>
-        <div class="form-row optional">
-          <label for="ingredient-\${index}-optional">Optional:</label>
-          <input type="checkbox" id="ingredient-\${index}-optional" name="optional" />
-        </div>
-  
-    \`;
-    container.appendChild(ingredientDiv); 
-  }
-
-  <!-- Remove Ingredient Function -->
-  function removeIngredient() {
-    const container = document.getElementById("ingredients-container");
-    if (container.children.length > 1) {
-      container.removeChild(container.lastChild);
+          <button type="button" class="remove-ingredient delete-btn" onclick="removeIngredient()">Remove</button>
+      \`;
+      container.appendChild(ingredientDiv); 
     }
-  }
-  
-</script>
-  `;
+
+    <!-- Remove Ingredient Function -->
+      function removeIngredient() {
+        const container = document.getElementById("ingredients-container");
+        if (container.children.length > 1) {
+          container.removeChild(container.lastChild);
+        }
+      }
+  </script>
+    `;
 }
