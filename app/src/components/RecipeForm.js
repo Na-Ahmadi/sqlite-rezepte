@@ -39,8 +39,23 @@ export default function RecipeForm() {
           </div>
           <div class="form-row">
             <div class="form-col">
+              <!-- <label for="ingredient-0-unit">Einheit:</label>
+              <input type="text" id="ingredient-0-unit" name="unit" placeholder="Einheit" required /> -->
               <label for="ingredient-0-unit">Einheit:</label>
-              <input type="text" id="ingredient-0-unit" name="unit" placeholder="Einheit" required />
+              <select id="ingredient-0-unit" name="ingredients[0][unit]" required>
+                <option value="" disabled selected>Einheit:</option>
+                <option value="g">Gramm (g)</option>
+                <option value="kg">Kilogramm (kg)</option>
+                <option value="ml">Milliliter (ml)</option>
+                <option value="l">Liter (l)</option>
+                <option value="tsp">Teelöffel (tsp)</option>
+                <option value="tbsp">Esslöffel (tbsp)</option>
+                <option value="cup">Tasse (cup)</option>
+                <option value="pcs">Stück (pcs)</option>
+                <option value="pinch">Prise (pinch)</option>
+                <option value="slice">Scheibe (slice)</option>
+                <option value="handful">Handvoll (handful)</option> 
+              </select>
             </div>
             <div class="form-col">
               <label for="ingredient-0-per-person">Menge pro Person:</label>
@@ -84,8 +99,23 @@ export default function RecipeForm() {
           </div>
           <div class="form-row">
             <div class="form-col">
-              <label for="ingredient-\${index}-unit">Einheit:</label>
-              <input type="text" id="ingredient-\${index}-unit" name="unit" placeholder="Einheit" required />
+              <!-- <label for="ingredient-\${index}-unit">Einheit:</label>
+              <input type="text" id="ingredient-\${index}-unit" name="unit" placeholder="Einheit" required /> -->
+              <label for="ingredient-0-unit">Einheit:</label>
+               <select id="ingredient-0-unit" name="ingredients[0][unit]" required>
+                <option value="" disabled selected>Einheit:</option>
+                <option value="g">Gramm (g)</option>
+                <option value="kg">Kilogramm (kg)</option>
+                <option value="ml">Milliliter (ml)</option>
+                <option value="l">Liter (l)</option>
+                <option value="tsp">Teelöffel (tsp)</option>
+                <option value="tbsp">Esslöffel (tbsp)</option>
+                <option value="cup">Tasse (cup)</option>
+                <option value="pcs">Stück (pcs)</option>
+                <option value="pinch">Prise (pinch)</option>
+                <option value="slice">Scheibe (slice)</option>
+                <option value="handful">Handvoll (handful)</option> 
+              </select>
             </div>
             <div class="form-col">
               <label for="ingredient-\${index}-per-person">Menge pro Person:</label>

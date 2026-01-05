@@ -81,7 +81,7 @@ export default function Ingredients({ recipe }) {
         <h3>Zubereitung</h3>
         <div>${recipe.instructions}</div>
       </section>
-      
+
       <!-- Löschen Button -->
       <form
         method="POST"
