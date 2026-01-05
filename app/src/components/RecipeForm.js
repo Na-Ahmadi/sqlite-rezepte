@@ -59,7 +59,7 @@ export default function RecipeForm() {
             </div>
             <div class="form-col">
               <label for="ingredient-0-per-person">Menge pro Person:</label>
-              <input type="number" id="ingredient-0-per-person" name="quantity_per_person" placeholder="Menge pro Person" required />
+              <input type="number" id="ingredient-0-per-person" name="quantity_per_person" placeholder="Menge pro Person" min="0" step="1" required />
             </div>
           </div>
           <div class="form-row optional">
@@ -94,7 +94,7 @@ export default function RecipeForm() {
             </div>
             <div class="form-col">
               <label for="ingredient-\${index}-quantity">Menge:</label>
-              <input type="number" id="ingredient-\${index}-quantity" name="quantity" placeholder="Menge" required />
+              <input type="number" id="ingredient-\${index}-quantity" name="quantity" placeholder="Menge" min="0" step="1" required />
             </div>
           </div>
           <div class="form-row">
@@ -119,7 +119,7 @@ export default function RecipeForm() {
             </div>
             <div class="form-col">
               <label for="ingredient-\${index}-per-person">Menge pro Person:</label>
-              <input type="number" id="ingredient-\${index}-per-person" name="quantity_per_person" placeholder="Menge pro Person" required />
+              <input type="number" id="ingredient-\${index}-per-person" name="quantity_per_person" placeholder="Menge pro Person" min="0" step="1" required />
             </div>
           </div>
           <div class="form-row optional">
