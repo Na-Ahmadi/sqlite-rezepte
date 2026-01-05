@@ -23,16 +23,6 @@ export default function RecipeForm() {
         <input type="number" id="servings" name="servings" min="1" required />
       </div>
 
-      <!-- <div class="form-row">
-        <label for="created">Erstellt:</label>
-        <input type="date" id="created" name="created" required />
-      </div>
-
-      <div class="form-row">
-        <label for="updated">Aktualisiert:</label>
-        <input type="date" id="updated" name="updated" />
-      </div> -->
-
       <!-- Ingredients Fields -->
       <h2>Ingredients</h2>
       <div id="ingredients-container">
@@ -65,8 +55,9 @@ export default function RecipeForm() {
       </div>
       <div class="ingredient-buttons">
         <button type="button" id="add-ingredient" class="add-ingredient" onclick="addIngredient()">Add +</button>  
-        <button type="button" class="remove-ingredient">Remove</button>
+        <button type="button" class="remove-ingredient" onclick="removeIngredient()">Remove</button>
       </div>
+      <!-- Submit Button -->
       <div class="form-btn-container">
         <button type="submit" class="submit-btn">Rezept speichern</button>
       </div>
@@ -75,8 +66,7 @@ export default function RecipeForm() {
 </div>
 
 
-<!--   -->
-
+<!-- JavaScript for dynamic ingredient fields -->
 <script>
   function addIngredient(){
     const container = document.getElementById('ingredients-container');
@@ -112,6 +102,15 @@ export default function RecipeForm() {
     \`;
     container.appendChild(ingredientDiv); 
   }
+
+  <!-- Remove Ingredient Function -->
+  function removeIngredient() {
+    const container = document.getElementById("ingredients-container");
+    if (container.children.length > 1) {
+      container.removeChild(container.lastChild);
+    }
+  }
+  
 </script>
   `;
 }
