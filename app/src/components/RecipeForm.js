@@ -44,17 +44,17 @@ export default function RecipeForm() {
               <label for="ingredient-0-unit">Einheit:</label>
               <select id="ingredient-0-unit" name="ingredients[0][unit]" required>
                 <option value="" disabled selected>Einheit:</option>
-                <option value="g">Gramm (g)</option>
-                <option value="kg">Kilogramm (kg)</option>
-                <option value="ml">Milliliter (ml)</option>
-                <option value="l">Liter (l)</option>
-                <option value="tsp">Teelöffel (tsp)</option>
-                <option value="tbsp">Esslöffel (tbsp)</option>
-                <option value="cup">Tasse (cup)</option>
-                <option value="pcs">Stück (pcs)</option>
-                <option value="pinch">Prise (pinch)</option>
-                <option value="slice">Scheibe (slice)</option>
-                <option value="handful">Handvoll (handful)</option> 
+                <option value="g">Gramm</option>
+                <option value="kg">Kilogramm</option>
+                <option value="ml">Milliliter</option>
+                <option value="l">Liter</option>
+                <option value="tsp">Teelöffel</option>
+                <option value="tbsp">Esslöffel</option>
+                <option value="cup">Tasse</option>
+                <option value="pcs">Stück</option>
+                <option value="pinch">Prise</option>
+                <option value="slice">Scheibe</option>
+                <option value="handful">Handvoll</option> 
               </select>
             </div>
             <div class="form-col">

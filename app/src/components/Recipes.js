@@ -32,7 +32,9 @@ export default function Recipes({ recipes, sort = "" }) {
             (r) => /* html */ `
               <article class="recipe-card">
                 <a href="/recipes/${r.id}" class="recipe-link">
-                <image src="/" alt="image"/>
+                  <div class="recipe-image">
+                    <image src="/" alt="image"/>
+                  </div>
                 <h2>${r.title}</h2>
                 <p>${r.description}</p>
                 <span>Aktualisiert: ${r.updated}</span>

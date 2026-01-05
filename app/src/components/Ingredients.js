@@ -27,7 +27,7 @@ export default function Ingredients({ recipe }) {
     <article class="recipe-detail">
       <!-- Zurück Button -->
       <div class="recipe-back">
-        <a href="/" class="back-btn">⬅ Zurück</a>
+        <a href="/" class="back-btn">⬅ Zurück zu den Rezepten</a>
       </div>
       <!-- Header -->
       <header class="recipe-header">
