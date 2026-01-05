@@ -57,13 +57,38 @@ export function getPostRecipe({
   servings,
   created,
   updated,
+  ingredients = [],
 }) {
+
   const stmt = db.prepare(`
     INSERT INTO recipes (title, description, servings, created, updated)
     VALUES (?, ?, ?, ?, ?)
-  `);
-  const info = stmt.run(title, description, servings, created, updated);
-  return info.lastInsertRowid;
+    `);
+    const info = stmt.run(title, description, servings, created, updated);
+    // return info.lastInsertRowid;
+    const recipeId = info.lastInsertRowid;
+    console.log("Saved recipe ID:", recipeId);
+    
+    const ingredientStmt = db.prepare(`
+      INSERT INTO ingredients (name, quantity, unit, quantity_per_person, optional, recipe_id)
+      VALUES (?, ?, ?, ?, ?, ?)
+      `);
+      console.log("Saved recipe ID:", recipeId);
+
+  for (const ingredient of ingredients) {
+    ingredientStmt.run(
+      ingredient.name,
+      ingredient.quantity,
+      ingredient.unit,
+      ingredient.quantity_per_person,
+      ingredient.optional ? 1 : 0,
+      recipeId
+    );
+  }
+
+  return recipeId;
+
+
 }
 
 export function deleteRecipeById(recipeId) {

@@ -58,6 +58,7 @@ export default [
       }
     },
   },
+
   // ----------- frontend ------------------
   {
     pattern: new URLPattern({ pathname: "/" }),
@@ -101,7 +102,7 @@ export default [
       }
     },
   },
-
+  // <-- Create New Recipe -->
   {
     pattern: new URLPattern({ pathname: "/new-recipe" }),
     handler: async (
@@ -125,12 +126,16 @@ export default [
 
             const now = new Date().toISOString().split("T")[0];
 
+            const ingredients = parseIngredients(params);
+            console.log("Parsed ingredients:", ingredients);
+
             getPostRecipe({
               title: params.title,
               description: params.description,
               servings,
               created: now,
               updated: now,
+              ingredients,
             });
             res.writeHead(302, { Location: "/" });
             res.end();
@@ -150,6 +155,7 @@ export default [
       return true;
     },
   },
+  // <-- Delete Recipe -->
   {
     pattern: new URLPattern({ pathname: "/delete-recipe/:id" }),
     handler: async (
@@ -172,7 +178,8 @@ export default [
       }
     },
   },
-  // ------------- public folder routes -----------
+
+  // <------------ public folder routes ----------->
   {
     pattern: new URLPattern({ pathname: "/*" }),
     handler: async (req, res) => {
@@ -237,4 +244,20 @@ function getRequestBody(req) {
       reject(err);
     });
   });
+}
+
+// -------- parseIngredients ---------
+
+function parseIngredients(params) {
+  const ingredients = [];
+  Object.keys(params).forEach((key) => {
+    const match = key.match(/ingredients\[(\d+)\]\[(.+)\]/);
+    if (match) {
+      const index = parseInt(match[1], 10);
+      const field = match[2];
+      if (!ingredients[index]) ingredients[index] = {};
+      ingredients[index][field] = params[key];
+    }
+  });
+  return ingredients;
 }

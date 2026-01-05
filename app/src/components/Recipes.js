@@ -26,6 +26,7 @@ export default function Recipes({ recipes, sort = "" }) {
         </form>
       </header>
 
+      <!-- Recipe Cards -->
       <div class="recipes-container">
         ${recipes
           .map(

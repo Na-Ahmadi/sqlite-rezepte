@@ -15,7 +15,8 @@
  *       name: string;
  *       quantity: number;
  *       unit: string;
- *       optional?: boolean
+ *       optional?: boolean;
+ *      quantity_per_person: number;        
  *     }[]
  *   }
  * }} props
