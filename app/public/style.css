@@ -103,6 +103,7 @@ img {
 /* Back / Add Button */
 .back-btn,
 .add-btn,
+.add-ingredient,
 .delete-btn {
   display: inline-block;
   transition: background 0.2s ease;
@@ -130,6 +131,14 @@ img {
   background-color: #4caf50;
   &:hover {
     background: #45a049;
+  }
+}
+.add-ingredient {
+  display: block;
+  margin-left: auto;
+  background-color: #17a2b8;
+  &:hover {
+    background: #138496;
   }
 }
 /* -------------------  Rezept Detail ------------------- */
