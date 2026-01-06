@@ -113,16 +113,31 @@ export default [
             if (isNaN(servings) || servings < 1) {
               servings = 1;
             }
+
+            // Validierung der Eingaben
+            // const servings = Math.max(parseInt(formData.servings) || 1, 1);
+            const prep_time = toMinutes(
+              formData.prep_time,
+              formData.prep_time_unit
+            );
+            const cook_time = toMinutes(
+              formData.cook_time,
+              formData.cook_time_unit
+            );
+            const total_time = prep_time + cook_time;
+
             const now = new Date().toISOString().split("T")[0];
 
             const ingredients = parseIngredients(formData);
-            console.log("Parsed ingredients:", ingredients);
 
             getPostRecipe({
               title: formData.title,
               description: formData.description,
               instructions: formData.instructions,
               servings,
+              prep_time,
+              cook_time,
+              total_time,
               created: now,
               updated: now,
               ingredients,
@@ -239,7 +254,6 @@ function parseIngredients(formData) {
     if (match) {
       const index = parseInt(match[1], 10);
       const field = match[2];
-      // if (!ingredients[index]) ingredients[index] = {};
       if (ingredients[index] === undefined) {
         ingredients[index] = {};
       }
@@ -248,3 +262,11 @@ function parseIngredients(formData) {
   });
   return ingredients;
 }
+
+// -------- toMinutes ---------
+// Hilfsfunktion: Umrechnung in Minuten
+const toMinutes = (value, unit) => {
+  const num = parseInt(value);
+  if (isNaN(num) || num < 0) return 0;
+  return unit === "h" ? num * 60 : num;
+};

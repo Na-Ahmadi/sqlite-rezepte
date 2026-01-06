@@ -1,5 +1,5 @@
 /**
- * @param {{ recipes: { id: string; title: string; updated: string; sort: string,  description: string }[];}} props
+ * @param {{ recipes: { id: string; title: string; updated: string; sort: string,  description: string }[]; }} props
  * @returns {string}
  */
 
@@ -13,7 +13,7 @@ export default function Recipes({ recipes }) {
       <h1>Alle Rezepte</h1>
       <header class="recipes-header">
         <a href="/new-recipe" class="add-btn">Rezept hinzufügen</a>
-
+      
         <form method="GET" class="sort-form">
           <label for="sort">Sortieren nach:</label>
           <select name="sort" id="sort" onchange="this.form.submit()">    

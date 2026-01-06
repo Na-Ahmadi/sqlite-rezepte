@@ -23,14 +23,33 @@ export default function RecipeForm() {
           <label for="servings">Portionen:</label>
           <input type="number" id="servings" name="servings" min="1" required />
         </div>
-        <div class="form-row">
+        <!-- <div class="form-row">
           <label for="prep_time">Vorbereitungszeit:</label>
           <input type="number" id="prep_time" name="prep_time" min="1" required />
         </div>
         <div class="form-row">
           <label for="cook_time ">Kochzeit:</label>
           <input type="number" id="cook_time " name="cook_time " min="1" required />
+        </div> -->
+        <div class="form-row">
+          <label for="prep_time">Vorbereitungszeit:</label>
+          <input type="number" id="prep_time" name="prep_time" min="1" required />
+          <select name="prep_time_unit" required>
+            <option value="min">Minuten</option>
+            <option value="h">Stunden</option>
+          </select>
         </div>
+
+        <div class="form-row">
+          <label for="cook_time">Kochzeit:</label>
+          <input type="number" id="cook_time" name="cook_time" min="1" required />
+          <select name="cook_time_unit" required>
+            <option value="min">Minuten</option>
+            <option value="h">Stunden</option>
+          </select>
+      </div>
+
+
       </div>
 
       <!-- Ingredients Fields -->

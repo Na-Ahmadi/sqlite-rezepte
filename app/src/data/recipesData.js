@@ -58,12 +58,15 @@ export function getPostRecipe({
   servings,
   created,
   updated,
+  prep_time,
+  cook_time,
+  total_time,
   instructions,
   ingredients = [],
 }) {
   const stmt = db.prepare(`
-    INSERT INTO recipes (title, description, servings, created, updated, instructions)
-    VALUES (?, ?, ?, ?, ?, ?)
+    INSERT INTO recipes (title, description, servings, created, updated, prep_time, cook_time, total_time, instructions)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
   const info = stmt.run(
     title,
@@ -71,6 +74,9 @@ export function getPostRecipe({
     servings,
     created,
     updated,
+    prep_time,
+    cook_time,
+    total_time,
     instructions
   );
   const recipeId = info.lastInsertRowid;
