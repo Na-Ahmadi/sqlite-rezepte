@@ -152,6 +152,7 @@ img {
 }
 .add-ingredient {
   display: block;
+  cursor: pointer;
   margin-left: auto;
   background-color: #17a2b8;
   &:hover {
@@ -376,7 +377,8 @@ img {
 label {
   display: block;
   margin-top: 15px;
-  font-weight: bold;
+  color: #434343;
+  /* font-weight: bold; */
 }
 
 input[type="text"],
@@ -394,6 +396,15 @@ textarea {
 
 textarea {
   resize: vertical;
+}
+.time-servings-container {
+  display: flex;
+  column-gap: 2rem;
+  flex-wrap: wrap;
+
+  .form-row {
+    flex: 1;
+  }
 }
 
 .ingredient {
@@ -414,6 +425,7 @@ textarea {
 
   label {
     margin-top: 0;
+    color: #434343;
   }
 }
 
@@ -428,6 +440,7 @@ textarea {
 
 .ingredient label {
   font-weight: normal;
+
 }
 .form-btn-container {
   display: inline-block;

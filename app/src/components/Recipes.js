@@ -3,7 +3,7 @@
  * @returns {string}
  */
 
-export default function Recipes({ recipes, sort = "" }) {
+export default function Recipes({ recipes }) {
   return /* html */ `
   <!-- <img src="/gemuse-pfanne.jpg" alt="gemuse-pfanne"/>
   <img src="/pfannkuchen.jpg" alt="pfannkuchen"/>

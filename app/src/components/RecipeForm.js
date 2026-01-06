@@ -17,11 +17,21 @@ export default function RecipeForm() {
         <label for="description">Beschreibung:</label>
         <textarea id="description" name="description" rows="3" required></textarea>
       </div>
-
-      <div class="form-row">
-        <label for="servings">Portionen:</label>
-        <input type="number" id="servings" name="servings" min="1" required />
-      </div>
+      
+      <!-- <div class="time-servings-container"> -->
+        <div class="form-row">
+          <label for="servings">Portionen:</label>
+          <input type="number" id="servings" name="servings" min="1" required />
+        </div>
+        <!-- <div class="form-row">
+          <label for="prep_time">Vorbereitungszeit:</label>
+          <input type="number" id="prep_time" name="prep_time" min="1" required />
+        </div>
+        <div class="form-row">
+          <label for="cook_time ">Kochzeit:</label>
+          <input type="number" id="cook_time " name="cook_time " min="1" required />
+        </div>
+      </div> -->
 
       <!-- Ingredients Fields -->
       <h2>Ingredients</h2>
@@ -71,6 +81,12 @@ export default function RecipeForm() {
       <div class="form-row ingredient-buttons">
         <button type="button" id="add-ingredient" class="add-ingredient" onclick="addIngredient()">Add +</button>  
       </div>
+
+       <div class="form-row">
+        <label for="instructions">Beschreibung:</label>
+        <textarea id="instructions" name="instructions" rows="3" required></textarea>
+      </div>
+
       <!-- Submit Button -->
       <div class="form-btn-container">
         <button type="submit" class="submit-btn">Rezept speichern</button>

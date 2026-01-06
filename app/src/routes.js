@@ -114,24 +114,20 @@ export default [
           const body = await getRequestBody(req);
           const contentType = req.headers["content-type"];
           if (contentType?.includes("application/x-www-form-urlencoded")) {
-            const params = Object.fromEntries(new URLSearchParams(body));
-            console.log(
-              "Form params:",
-              new URLSearchParams(body).getAll("name")
-            );
-            let servings = parseInt(params.servings);
+            const formData = Object.fromEntries(new URLSearchParams(body));
+            let servings = parseInt(formData.servings);
             if (isNaN(servings) || servings < 1) {
               servings = 1;
             }
-
             const now = new Date().toISOString().split("T")[0];
 
-            const ingredients = parseIngredients(params);
+            const ingredients = parseIngredients(formData);
             console.log("Parsed ingredients:", ingredients);
-
+            
             getPostRecipe({
-              title: params.title,
-              description: params.description,
+              title: formData.title,
+              description: formData.description,
+              instructions: formData.instructions,
               servings,
               created: now,
               updated: now,
@@ -168,7 +164,6 @@ export default [
         if (match) {
           const recipeId = match.pathname.groups.id;
           deleteRecipeById(recipeId);
-
           console.log(`✅ Rezept mit ID ${recipeId} wurde gelöscht!`);
 
           res.writeHead(302, { location: "/" });
@@ -247,16 +242,18 @@ function getRequestBody(req) {
 }
 
 // -------- parseIngredients ---------
-
-function parseIngredients(params) {
+function parseIngredients(formData) {
   const ingredients = [];
-  Object.keys(params).forEach((key) => {
+  Object.keys(formData).forEach((key) => {
     const match = key.match(/ingredients\[(\d+)\]\[(.+)\]/);
     if (match) {
       const index = parseInt(match[1], 10);
       const field = match[2];
-      if (!ingredients[index]) ingredients[index] = {};
-      ingredients[index][field] = params[key];
+      // if (!ingredients[index]) ingredients[index] = {};
+      if (ingredients[index] === undefined) {
+        ingredients[index] = {};
+      }
+      ingredients[index][field] = formData[key];
     }
   });
   return ingredients;

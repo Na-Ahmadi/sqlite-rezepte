@@ -16,7 +16,7 @@
  *       quantity: number;
  *       unit: string;
  *       optional?: boolean;
- *      quantity_per_person: number;        
+ *      quantity_per_person: number;
  *     }[]
  *   }
  * }} props
@@ -43,7 +43,8 @@ export default function Ingredients({ recipe }) {
           <span
             ><strong>Vorbereitungszeit:</strong> ${recipe.prep_time} min</span
           >
-          <span><strong>Kochzeit:</strong> ${recipe.cook_time} min</span>
+          <span><strong>Kochzeit:</strong> 
+          ${recipe.cook_time} min</span>
           <span><strong>Gesamtzeit:</strong> ${recipe.total_time} min</span>
         </div>
         <div class="meta-dates">
@@ -68,8 +69,9 @@ export default function Ingredients({ recipe }) {
             .map(
               (i) => `
           <li>
-            ${i.name} <strong>${i.quantity} ${" "}${i.unit}</strong>
-            ${i.optional ? "<em>optional</em>" : ""}
+            ${i.name}       ${i.optional ? "<em>optional</em>" : ""} <strong>${
+                i.quantity
+              } ${" "}${i.unit}</strong>
           </li>
         `
             )
