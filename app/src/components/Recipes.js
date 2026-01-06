@@ -1,5 +1,5 @@
 /**
- * @param {{ recipes: { id: string; title: string; updated: string; sort: string,  description: string }[]; sort: string }} props
+ * @param {{ recipes: { id: string; title: string; updated: string; sort: string,  description: string }[];}} props
  * @returns {string}
  */
 
