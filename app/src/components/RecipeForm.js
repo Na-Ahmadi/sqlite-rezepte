@@ -18,12 +18,12 @@ export default function RecipeForm() {
         <textarea id="description" name="description" rows="3" required></textarea>
       </div>
       
-      <!-- <div class="time-servings-container"> -->
+      <div class="time-servings-container">
         <div class="form-row">
           <label for="servings">Portionen:</label>
           <input type="number" id="servings" name="servings" min="1" required />
         </div>
-        <!-- <div class="form-row">
+        <div class="form-row">
           <label for="prep_time">Vorbereitungszeit:</label>
           <input type="number" id="prep_time" name="prep_time" min="1" required />
         </div>
@@ -31,7 +31,7 @@ export default function RecipeForm() {
           <label for="cook_time ">Kochzeit:</label>
           <input type="number" id="cook_time " name="cook_time " min="1" required />
         </div>
-      </div> -->
+      </div>
 
       <!-- Ingredients Fields -->
       <h2>Ingredients</h2>

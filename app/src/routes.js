@@ -25,13 +25,21 @@ const MIME_TYPES = {
 
 const API_URL = "http://localhost:3006/api/recipes";
 
+/**
+ * @typedef {Object} Route
+ * @property {URLPattern} pattern - Das zu prüfende URL-Muster.
+ * @property {(
+ *   req: import("http").IncomingMessage,
+ *   res: import("http").ServerResponse,
+ *   pattern: URLPattern
+ * ) => Promise<boolean>} handler - Die Handler-Funktion für diese Route.
+ */
+
+/** @type {Route[]} */
 export default [
   {
     pattern: new URLPattern({ pathname: `/api/recipes` }),
-    handler: async (
-      /** @type import("http").IncomingMessage */ req,
-      /** @type import("http").ServerResponse */ res
-    ) => {
+    handler: async (req, res) => {
       const url = new URL(req.url, "http://localhost:3006");
       const sort = url.searchParams.get("sort") || "updated_desc";
       const recipes = fetchAllRecipes(sort);
@@ -41,11 +49,7 @@ export default [
   },
   {
     pattern: new URLPattern({ pathname: `/api/recipes/:id` }),
-    handler: async (
-      /** @type import("http").IncomingMessage */ req,
-      /** @type import("http").ServerResponse  */ res,
-      /** @type {URLPattern} */ pattern
-    ) => {
+    handler: async (req, res, pattern) => {
       const match = pattern.exec(req.url);
       if (match && match.pathname.groups.id) {
         const recipeId = match.pathname.groups.id;
@@ -62,10 +66,7 @@ export default [
   // ----------- frontend ------------------
   {
     pattern: new URLPattern({ pathname: "/" }),
-    handler: async (
-      /** @type {import("http").IncomingMessage} */ req,
-      /** @type {import("http").ServerResponse}  */ res
-    ) => {
+    handler: async (req, res) => {
       const url = new URL(req.url, "http://localhost:3006");
       const sort = url.searchParams.get("sort") || "updated_desc";
 
@@ -81,11 +82,7 @@ export default [
   },
   {
     pattern: new URLPattern({ pathname: "/recipes/:id" }),
-    handler: async (
-      /** @type {import("http").IncomingMessage} */ req,
-      /** @type {import("http").ServerResponse}  */ res,
-      /** @type {URLPattern} */ pattern
-    ) => {
+    handler: async (req, res, pattern) => {
       const match = pattern.exec(req.url);
       if (match) {
         const recipeId = match.pathname.groups.id;
@@ -105,10 +102,7 @@ export default [
   // <-- Create New Recipe -->
   {
     pattern: new URLPattern({ pathname: "/new-recipe" }),
-    handler: async (
-      /** @type {import("http").IncomingMessage} */ req,
-      /** @type {import("http").ServerResponse}  */ res
-    ) => {
+    handler: async (req, res) => {
       if (req.method === "POST") {
         try {
           const body = await getRequestBody(req);
@@ -123,7 +117,7 @@ export default [
 
             const ingredients = parseIngredients(formData);
             console.log("Parsed ingredients:", ingredients);
-            
+
             getPostRecipe({
               title: formData.title,
               description: formData.description,
@@ -154,11 +148,7 @@ export default [
   // <-- Delete Recipe -->
   {
     pattern: new URLPattern({ pathname: "/delete-recipe/:id" }),
-    handler: async (
-      /** @type {import("http").IncomingMessage} */ req,
-      /** @type {import("http").ServerResponse} */ res,
-      /** @type {URLPattern} */ pattern
-    ) => {
+    handler: async (req, res, pattern) => {
       if (req.method === "POST") {
         const match = pattern.exec(req.url);
         if (match) {

@@ -5,6 +5,7 @@ const db = new DatabaseSync("recipes.db");
 /**
  * @param {Object} recipe
  */
+// <-- Helper Function to add ingredients to a recipe -->
 const addIngredientsToRecipe = (recipe) => {
   const ingredients = db
     .prepare(
@@ -50,7 +51,7 @@ export function getRecipeById(recipeId) {
   addIngredientsToRecipe(recipe);
   return recipe;
 }
-
+// <-- add a new recipe to the database -->
 export function getPostRecipe({
   title,
   description,
@@ -73,13 +74,12 @@ export function getPostRecipe({
     instructions
   );
   const recipeId = info.lastInsertRowid;
-  console.log("Saved recipe ID:", recipeId);
+
   const ingredientStmt = db.prepare(`
       INSERT INTO ingredients (name, quantity, unit, quantity_per_person, optional, recipe_id)
       VALUES (?, ?, ?, ?, ?, ?)
       `);
-  console.log("Saved recipe ID:", recipeId);
-
+  // <-- Insert each ingredient associated with the recipe -->
   for (const ingredient of ingredients) {
     ingredientStmt.run(
       ingredient.name,

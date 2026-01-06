@@ -111,7 +111,7 @@ CREATE TABLE ingredients (
 INSERT INTO recipes (title, description, servings, prep_time, cook_time, total_time, is_vegetarian, is_vegan, is_gluten_free, instructions)
 VALUES ('Spaghetti Bolognese', 'Leckere klassische Spaghetti mit Fleischsauce', 4, 15, 30, 45, 0, 0, 0, '1. Wasser kochen 2. Nudeln kochen 3. Sauce zubereiten');
 
-INSERT INTO ingredients (name, amount, unit, amount_per_person, optional, recipe_id)
+INSERT INTO ingredients (name, quantity, unit, quantity_per_person, optional, recipe_id)
 VALUES 
 ('Spaghetti', 400, 'g', 100, 0, 1),
 ('Hackfleisch', 500, 'g', 125, 0, 1),
@@ -133,7 +133,7 @@ VALUES (
     '1. Gemüse schneiden 2. Öl erhitzen 3. Gemüse anbraten 4. Würzen nach Geschmack'
 );
 
-INSERT INTO ingredients (name, amount, unit, amount_per_person, optional, recipe_id) VALUES
+INSERT INTO ingredients (name, quantity, unit, quantity_per_person, optional, recipe_id) VALUES
 ('Paprika rot', 300, 'g', 100, 0, 2),
 ('Zucchini', 300, 'g', 100, 0, 2),
 ('Karotten', 200, 'g', 66.7, 0, 2),
@@ -156,7 +156,7 @@ VALUES (
     '1. Teig vorbereiten 2. Pfanne erhitzen 3. Teig portionsweise ausbacken 4. Servieren'
 );
 
-INSERT INTO ingredients (name, amount, unit, amount_per_person, optional, recipe_id) VALUES
+INSERT INTO ingredients (name, quantity, unit, quantity_per_person, optional, recipe_id) VALUES
 ('Mehl', 250, 'g', 62.5, 0, 3),
 ('Milch', 500, 'ml', 125, 0, 3),
 ('Eier', 4, 'Stück', 1, 0, 3),

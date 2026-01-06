@@ -43,8 +43,7 @@ export default function Ingredients({ recipe }) {
           <span
             ><strong>Vorbereitungszeit:</strong> ${recipe.prep_time} min</span
           >
-          <span><strong>Kochzeit:</strong> 
-          ${recipe.cook_time} min</span>
+          <span><strong>Kochzeit:</strong> ${recipe.cook_time} min</span>
           <span><strong>Gesamtzeit:</strong> ${recipe.total_time} min</span>
         </div>
         <div class="meta-dates">
