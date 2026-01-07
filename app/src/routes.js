@@ -105,12 +105,6 @@ export default [
     pattern: new URLPattern({ pathname: "/new-recipe" }),
     handler: async (req, res) => {
       if (req.method === "POST") {
-        // try {
-        // const body = await getRequestBody(req);
-        // console.log("Request Body:", body);
-        // const contentType = req.headers["content-type"];
-        // if (contentType?.includes("application/x-www-form-urlencoded")) {
-        //   const formData = Object.fromEntries(new URLSearchParams(body));
         const form = formidable({
           uploadDir: path.join(process.cwd(), "public", "uploads"),
           keepExtensions: true,
@@ -134,8 +128,6 @@ export default [
 
           const now = new Date().toISOString().split("T")[0];
 
-          const ingredients = parseIngredients(fields);
-
           let imagePath = null;
           const file = Array.isArray(files.upload_image)
             ? files.upload_image[0]
@@ -144,13 +136,6 @@ export default [
           if (file && file.size > 0 && file.filepath) {
             imagePath = `/uploads/${path.basename(file.filepath)}`;
           }
-          // console.log("File object:", file);
-          // console.log("Saved file path:", file?.filepath);
-          // console.log(
-          //   "Public URL:",
-          //   file ? `/uploads/${path.basename(file.filepath)}` : null
-          // );
-          console.log("Public URL für Browser:", imagePath);
 
           const v = (x) => (Array.isArray(x) ? x[0] : x);
 
@@ -249,25 +234,6 @@ function sendHtml(res, htmlContent) {
   res.end(htmlContent);
 }
 
-// -------- getRequestBody ---------
-function getRequestBody(req) {
-  return new Promise((resolve, reject) => {
-    let body = "";
-
-    req.on("data", (chunk) => {
-      body += chunk.toString();
-    });
-
-    req.on("end", () => {
-      resolve(body);
-    });
-
-    req.on("error", (err) => {
-      reject(err);
-    });
-  });
-}
-
 // -------- parseIngredients ---------
 
 function parseIngredients(fields) {
@@ -287,25 +253,6 @@ function parseIngredients(fields) {
 
   return ingredients;
 }
-
-// function parseIngredients(formData) {
-//   const ingredients = [];
-
-//   Object.keys(formData).forEach((key) => {
-//     const match = key.match(/ingredients\[(\d+)\]\[(.+)\]/);
-//     if (match) {
-//       const index = parseInt(match[1], 10);
-//       const field = match[2];
-
-//       if (ingredients[index] === undefined) {
-//         ingredients[index] = {};
-//       }
-//       ingredients[index][field] = formData[key];
-//     }
-//   });
-//   return ingredients;
-// }
-
 // -------- toMinutes ---------
 // Hilfsfunktion: Umrechnung in Minuten
 const toMinutes = (value, unit) => {

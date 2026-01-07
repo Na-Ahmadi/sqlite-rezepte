@@ -31,7 +31,7 @@ export default function Ingredients({ recipe }) {
       <div class="recipe-back">
         <a href="/" class="back-btn">⬅ Zurück zu den Rezepten</a>
       </div>
-      <div class="recipe-detail-image"> >
+      <div class="recipe-detail-image"> 
         ${recipe.image_path
           ? `<img src="${recipe.image_path}" alt="${recipe.title}" />`
           : `<div class="no-image">Kein Bild</div>`}

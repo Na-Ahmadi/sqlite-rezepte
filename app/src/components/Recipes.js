@@ -4,14 +4,7 @@
  */
 
 export default function Recipes({ recipes }) {
-  recipes.forEach((r) => {
-    console.log("Recipe ID:", r.id, "image_path:", r.image_path);
-  });
   return /* html */ `
-  <!-- <img src="/gemuse-pfanne.jpg" alt="gemuse-pfanne"/>
-  <img src="/pfannkuchen.jpg" alt="pfannkuchen"/>
-  <img src="/spaghetti-mit-bolognese.jpg" alt="spaghetti-mit-bolognese"/> -->
-
   <section class="recipes-wrapper">
       <h1>Alle Rezepte</h1>
       <header class="recipes-header">
@@ -73,7 +66,7 @@ export default function Recipes({ recipes }) {
 
             // Search-Input
             document.addEventListener('DOMContentLoaded', () => {
-              const searchInput = document.getElementById('search-input'); // jetzt sicher
+              const searchInput = document.getElementById('search-input'); 
               const recipeCards = document.querySelectorAll('.recipe-card');
 
               searchInput.addEventListener('input', function () {
