@@ -6,5 +6,8 @@
   },
   "devDependencies": {
     "@types/node": "24.10.1"
+  },
+  "dependencies": {
+    "formidable": "^3.5.4"
   }
 }

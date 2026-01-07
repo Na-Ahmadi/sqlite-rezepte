@@ -1,5 +1,6 @@
+import formidable from "formidable";
 import { readFile, stat } from "node:fs/promises";
-import { extname, join } from "node:path";
+import path, { extname, join } from "node:path";
 import ErrorMessage from "./components/ErrorMessage";
 import Ingredients from "./components/Ingredients";
 import RecipeForm from "./components/RecipeForm";
@@ -99,58 +100,79 @@ export default [
       }
     },
   },
-  // <-- Create New Recipe -->
+  // <---------- Create New Recipe and POST --------------->
   {
     pattern: new URLPattern({ pathname: "/new-recipe" }),
     handler: async (req, res) => {
       if (req.method === "POST") {
-        try {
-          const body = await getRequestBody(req);
-          const contentType = req.headers["content-type"];
-          if (contentType?.includes("application/x-www-form-urlencoded")) {
-            const formData = Object.fromEntries(new URLSearchParams(body));
-            let servings = parseInt(formData.servings);
-            if (isNaN(servings) || servings < 1) {
-              servings = 1;
-            }
+        // try {
+        // const body = await getRequestBody(req);
+        // console.log("Request Body:", body);
+        // const contentType = req.headers["content-type"];
+        // if (contentType?.includes("application/x-www-form-urlencoded")) {
+        //   const formData = Object.fromEntries(new URLSearchParams(body));
+        const form = formidable({
+          uploadDir: path.join(process.cwd(), "public", "uploads"),
+          keepExtensions: true,
+          multiples: false,
+        });
 
-            // Validierung der Eingaben
-            // const servings = Math.max(parseInt(formData.servings) || 1, 1);
-            const prep_time = toMinutes(
-              formData.prep_time,
-              formData.prep_time_unit
-            );
-            const cook_time = toMinutes(
-              formData.cook_time,
-              formData.cook_time_unit
-            );
-            const total_time = prep_time + cook_time;
-
-            const now = new Date().toISOString().split("T")[0];
-
-            const ingredients = parseIngredients(formData);
-
-            getPostRecipe({
-              title: formData.title,
-              description: formData.description,
-              instructions: formData.instructions,
-              servings,
-              prep_time,
-              cook_time,
-              total_time,
-              created: now,
-              updated: now,
-              ingredients,
-            });
-            res.writeHead(302, { Location: "/" });
-            res.end();
-            return true;
+        form.parse(req, (err, fields, files) => {
+          if (err) {
+            res.writeHead(500);
+            res.end("Upload Fehler");
+            return;
           }
-        } catch (err) {
-          res.writeHead(500, { "Content-Type": "text/plain" });
-          res.end("Fehler beim Speichern des Rezepts");
-          return true;
-        }
+
+          let servings = parseInt(fields.servings);
+          if (isNaN(servings) || servings < 1) {
+            servings = 1;
+          }
+          // Validierung der Eingaben
+          const prep_time = toMinutes(fields.prep_time, fields.prep_time_unit);
+          const cook_time = toMinutes(fields.cook_time, fields.cook_time_unit);
+
+          const now = new Date().toISOString().split("T")[0];
+
+          const ingredients = parseIngredients(fields);
+
+          let imagePath = null;
+          const file = Array.isArray(files.upload_image)
+            ? files.upload_image[0]
+            : files.upload_image;
+
+          if (file && file.size > 0 && file.filepath) {
+            imagePath = `/uploads/${path.basename(file.filepath)}`;
+          }
+          // console.log("File object:", file);
+          // console.log("Saved file path:", file?.filepath);
+          // console.log(
+          //   "Public URL:",
+          //   file ? `/uploads/${path.basename(file.filepath)}` : null
+          // );
+          console.log("Public URL für Browser:", imagePath);
+
+          const v = (x) => (Array.isArray(x) ? x[0] : x);
+
+          getPostRecipe({
+            title: v(fields.title),
+            description: v(fields.description),
+            instructions: v(fields.instructions),
+            servings: parseInt(v(fields.servings), 10),
+            prep_time: parseInt(v(fields.prep_time), 10),
+            cook_time: parseInt(v(fields.cook_time), 10),
+            total_time: prep_time + cook_time,
+            created: now,
+            updated: now,
+            image_path: imagePath,
+            ingredients: parseIngredients(fields),
+          });
+
+          res.writeHead(302, { Location: "/" });
+          res.end();
+        });
+        return true;
+        // }
       }
 
       sendHtml(
@@ -247,21 +269,42 @@ function getRequestBody(req) {
 }
 
 // -------- parseIngredients ---------
-function parseIngredients(formData) {
+
+function parseIngredients(fields) {
   const ingredients = [];
-  Object.keys(formData).forEach((key) => {
+  const v = (x) => (Array.isArray(x) ? x[0] : x);
+
+  Object.keys(fields).forEach((key) => {
     const match = key.match(/ingredients\[(\d+)\]\[(.+)\]/);
-    if (match) {
-      const index = parseInt(match[1], 10);
-      const field = match[2];
-      if (ingredients[index] === undefined) {
-        ingredients[index] = {};
-      }
-      ingredients[index][field] = formData[key];
-    }
+    if (!match) return;
+
+    const index = Number(match[1]);
+    const field = match[2];
+
+    if (!ingredients[index]) ingredients[index] = {};
+    ingredients[index][field] = v(fields[key]);
   });
+
   return ingredients;
 }
+
+// function parseIngredients(formData) {
+//   const ingredients = [];
+
+//   Object.keys(formData).forEach((key) => {
+//     const match = key.match(/ingredients\[(\d+)\]\[(.+)\]/);
+//     if (match) {
+//       const index = parseInt(match[1], 10);
+//       const field = match[2];
+
+//       if (ingredients[index] === undefined) {
+//         ingredients[index] = {};
+//       }
+//       ingredients[index][field] = formData[key];
+//     }
+//   });
+//   return ingredients;
+// }
 
 // -------- toMinutes ---------
 // Hilfsfunktion: Umrechnung in Minuten

@@ -27,7 +27,7 @@ export function fetchAllRecipes(sort = "updated_desc") {
 
   const recipes = db
     .prepare(
-      `SELECT id, title, description, updated, instructions FROM recipes ORDER BY ${orderBy}`
+      `SELECT id, title, description, updated, image_path, instructions FROM recipes ORDER BY ${orderBy}`
     )
     .all();
   for (const recipe of recipes) {
@@ -42,7 +42,7 @@ export function fetchAllRecipes(sort = "updated_desc") {
 export function getRecipeById(recipeId) {
   const recipe = db
     .prepare(
-      "SELECT id, title, description, servings, prep_time, cook_time, total_time, created, updated, instructions  FROM recipes WHERE id = ?"
+      "SELECT id, title, description, servings, prep_time, cook_time, total_time, created, updated, image_path, instructions  FROM recipes WHERE id = ?"
     )
     .get(recipeId);
   if (!recipe) {
@@ -62,11 +62,12 @@ export function getPostRecipe({
   cook_time,
   total_time,
   instructions,
+  image_path = null,
   ingredients = [],
 }) {
   const stmt = db.prepare(`
-    INSERT INTO recipes (title, description, servings, created, updated, prep_time, cook_time, total_time, instructions)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO recipes (title, description, servings, created, updated, prep_time, cook_time, total_time, image_path, instructions)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
   const info = stmt.run(
     title,
@@ -77,6 +78,7 @@ export function getPostRecipe({
     prep_time,
     cook_time,
     total_time,
+    image_path ?? null,
     instructions
   );
   const recipeId = info.lastInsertRowid;

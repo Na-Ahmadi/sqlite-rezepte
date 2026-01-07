@@ -1,9 +1,12 @@
 /**
- * @param {{ recipes: { id: string; title: string; updated: string; sort: string,  description: string }[]; }} props
+ * @param {{ recipes: { id: string; title: string; updated: string; sort: string,  description: string, image_path: string }[]; }} props
  * @returns {string}
  */
 
 export default function Recipes({ recipes }) {
+  recipes.forEach((r) => {
+    console.log("Recipe ID:", r.id, "image_path:", r.image_path);
+  });
   return /* html */ `
   <!-- <img src="/gemuse-pfanne.jpg" alt="gemuse-pfanne"/>
   <img src="/pfannkuchen.jpg" alt="pfannkuchen"/>
@@ -34,7 +37,11 @@ export default function Recipes({ recipes }) {
               <article class="recipe-card">
                 <a href="/recipes/${r.id}" class="recipe-link">
                   <div class="recipe-image">
-                    <image src="/" alt="image"/>
+                    ${
+                      r.image_path
+                        ? `<img src="${r.image_path}" alt="${r.title}" />`
+                        : `<div class="no-image">Kein Bild</div>`
+                    }
                   </div>
                 <h2>${r.title}</h2>
                 <p>${r.description}</p>

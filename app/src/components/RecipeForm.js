@@ -6,7 +6,7 @@ export default function RecipeForm() {
       <h1 class="form-title">Neues Rezept erstellen</h1>
     </div>
   
-    <form id="recipe-form" action="/new-recipe" method="POST">
+    <form id="recipe-form" action="/new-recipe" method="POST" enctype="multipart/form-data">
       <!-- Recipe Fields -->
       <div class="form-row">
         <label for="title">Title:</label>
@@ -23,14 +23,6 @@ export default function RecipeForm() {
           <label for="servings">Portionen:</label>
           <input type="number" id="servings" name="servings" min="1" required />
         </div>
-        <!-- <div class="form-row">
-          <label for="prep_time">Vorbereitungszeit:</label>
-          <input type="number" id="prep_time" name="prep_time" min="1" required />
-        </div>
-        <div class="form-row">
-          <label for="cook_time ">Kochzeit:</label>
-          <input type="number" id="cook_time " name="cook_time " min="1" required />
-        </div> -->
         <div class="form-row">
           <label for="prep_time">Vorbereitungszeit:</label>
           <input type="number" id="prep_time" name="prep_time" min="1" required />
@@ -106,6 +98,13 @@ export default function RecipeForm() {
         <textarea id="instructions" name="instructions" rows="3" required></textarea>
       </div>
 
+      <div class="form-row">
+        <label for="upload-image">Rezeptbild hochladen:</label>
+        <input type="file" id="upload-image" name="upload_image" accept="image/*" />
+        <!-- Vorschau-Bild -->
+        <!-- <img id="image-preview" src="" alt="Image preview" style="display:none; max-width:100px; margin-left:10px;" /> -->
+      </div>
+
       <!-- Submit Button -->
       <div class="form-btn-container">
         <button type="submit" class="submit-btn">Rezept speichern</button>
@@ -116,6 +115,26 @@ export default function RecipeForm() {
 
   <!-- JavaScript for dynamic ingredient fields -->
   <script>
+    /*------Image Preview -----*/
+    /* const uploadInput = document.getElementById("upload-image");
+    const preview = document.getElementById("image-preview");
+
+    uploadInput.addEventListener("change", (event) => {
+      const file = event.target.files[0]; // erstes ausgewähltes Bild
+      if (!file) {
+        preview.style.display = "none";
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        preview.src = e.target.result; // Bildquelle setzen
+        preview.style.display = "inline-block"; // Vorschau sichtbar machen
+      };
+      reader.readAsDataURL(file); // Bild als DataURL lesen
+  }); */
+
+    <!-- Add Ingredient Function -->
     function addIngredient(){
       const container = document.getElementById('ingredients-container');
       const index = container.children.length;

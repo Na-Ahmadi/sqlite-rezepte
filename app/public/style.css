@@ -378,6 +378,7 @@ label {
   display: block;
   margin-top: 15px;
   color: #434343;
+  font-size: 0.9rem;
   /* font-weight: bold; */
 }
 
@@ -440,7 +441,6 @@ textarea {
 
 .ingredient label {
   font-weight: normal;
-
 }
 .form-btn-container {
   display: inline-block;
