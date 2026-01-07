@@ -16,6 +16,9 @@ export default function Recipes({ recipes }) {
       <h1>Alle Rezepte</h1>
       <header class="recipes-header">
         <a href="/new-recipe" class="add-btn">Rezept hinzufügen</a>
+        <div class="recipe-search">
+          <input type="text" id="search-input" placeholder="Rezept suchen..." />
+        </div>
       
         <form method="GET" class="sort-form">
           <label for="sort">Sortieren nach:</label>
@@ -29,7 +32,7 @@ export default function Recipes({ recipes }) {
         </form>
       </header>
 
-      <!-- Recipe Cards -->
+      <!------------ Recipe Cards -------------->
       <div class="recipes-container">
         ${recipes
           .map(
@@ -54,19 +57,37 @@ export default function Recipes({ recipes }) {
       </div>
     </section>
 
-        <script>
-        const select = document.getElementById('sort');
+       <script>
+            const select = document.getElementById('sort');
 
-        select.addEventListener('change', function () {
-          localStorage.setItem('sort', this.value);
-          this.form.submit();
-        });
+            // Sort-Einstellung aus localStorage
+            const savedSort = localStorage.getItem('sort');
+            if (savedSort) {
+              select.value = savedSort;
+            }
 
-        const savedSort = localStorage.getItem('sort');
-        if (savedSort) {
-          select.value = savedSort;
-        }
+            select.addEventListener('change', function () {
+              localStorage.setItem('sort', this.value);
+              this.form.submit();
+            });
+
+            // Search-Input
+            document.addEventListener('DOMContentLoaded', () => {
+              const searchInput = document.getElementById('search-input'); // jetzt sicher
+              const recipeCards = document.querySelectorAll('.recipe-card');
+
+              searchInput.addEventListener('input', function () {
+                const query = this.value.toLowerCase();
+
+                recipeCards.forEach((card) => {
+                  const title = card.querySelector('h2').textContent.toLowerCase();
+                  const description = card.querySelector('p').textContent.toLowerCase();
+
+                  card.style.display =
+                    title.includes(query) || description.includes(query) ? '' : 'none';
+                });
+              });
+            });
         </script>
-
       `;
 }
