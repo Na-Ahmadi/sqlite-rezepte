@@ -80,7 +80,7 @@ export default function RecipeForm() {
             </div>
             <div class="form-col">
               <label for="ingredient-0-per-person">Menge pro Person:</label>
-              <input type="number" id="ingredient-0-per-person" name="ingredients[0][quantity_per_person]" placeholder="Menge pro Person" min="0" step="1" required />
+              <input type="number" id="ingredient-0-per-person" name="ingredients[0][quantity_per_person]" placeholder="Menge pro Person" min="0" step="1"  />
             </div>
           </div>
           <div class="form-row optional">

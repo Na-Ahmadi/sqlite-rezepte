@@ -11,6 +11,7 @@
  *     prep_time: number;
  *     total_time: number;
  *      instructions: string;
+ *    image_path: string;
  *     ingredients: {
  *       name: string;
  *       quantity: number;
@@ -29,6 +30,11 @@ export default function Ingredients({ recipe }) {
       <!-- Zurück Button -->
       <div class="recipe-back">
         <a href="/" class="back-btn">⬅ Zurück zu den Rezepten</a>
+      </div>
+      <div class="recipe-detail-image"> >
+        ${recipe.image_path
+          ? `<img src="${recipe.image_path}" alt="${recipe.title}" />`
+          : `<div class="no-image">Kein Bild</div>`}
       </div>
       <!-- Header -->
       <header class="recipe-header">
