@@ -157,7 +157,6 @@ export default [
           res.end();
         });
         return true;
-        // }
       }
 
       sendHtml(

@@ -1,5 +1,5 @@
 /**
- * @param {{ recipes: { id: string; title: string; updated: string; sort: string,  description: string, image_path: string }[]; }} props
+ * @param {{ recipes: { id: string; title: string; updated: string; sort: string,  description: string, image_path: string, total_time: string }[]; }} props
  * @returns {string}
  */
 
@@ -41,9 +41,15 @@ export default function Recipes({ recipes }) {
                   </div>
                 <h2>${r.title}</h2>
                 <p>${r.description}</p>
-                <span>Aktualisiert: ${r.updated}</span>
-                </a>
-              </article>
+                <div class="recipe-card-time">
+                  <span>Aktualisiert: ${r.updated}</span>
+                  <span>${r.total_time} Min</span>
+                </div>
+                <div class="icon-container">
+                  <img src="/icon/right-arrow.png" alt="Pfeil" class="arrow-icon" width="10" height="10">
+                </div>
+              </a>
+            </article>
             `
           )
           .join("")}

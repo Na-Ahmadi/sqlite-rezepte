@@ -27,7 +27,7 @@ export function fetchAllRecipes(sort = "updated_desc") {
 
   const recipes = db
     .prepare(
-      `SELECT id, title, description, updated, image_path, instructions FROM recipes ORDER BY ${orderBy}`
+      `SELECT id, title, description, updated, image_path, instructions, total_time FROM recipes ORDER BY ${orderBy}`
     )
     .all();
   for (const recipe of recipes) {

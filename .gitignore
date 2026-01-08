@@ -1,8 +1,8 @@
 # Node modules
 node_modules/
 
-recipes.db
-*.jpg
+# recipes.db
+# *.jpg
 
 # Logs
 logs

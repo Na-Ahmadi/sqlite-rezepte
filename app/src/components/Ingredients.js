@@ -28,10 +28,10 @@ export default function Ingredients({ recipe }) {
   return /* HTML */ `
     <article class="recipe-detail">
       <!-- Zurück Button -->
-      <div class="recipe-back">
+      <div class="recipe-btn-container">
         <a href="/" class="back-btn">⬅ Zurück zu den Rezepten</a>
       </div>
-      <div class="recipe-detail-image"> 
+      <div class="recipe-detail-image">
         ${recipe.image_path
           ? `<img src="${recipe.image_path}" alt="${recipe.title}" />`
           : `<div class="no-image">Kein Bild</div>`}
@@ -74,7 +74,7 @@ export default function Ingredients({ recipe }) {
             .map(
               (i) => `
           <li>
-            ${i.name}       ${i.optional ? "<em>optional</em>" : ""} <strong>${
+            ${i.name}${i.optional ? "<em>optional</em>" : ""} <strong>${
                 i.quantity
               } ${" "}${i.unit}</strong>
           </li>
@@ -83,11 +83,9 @@ export default function Ingredients({ recipe }) {
             .join("")}
         </ul>
       </section>
-
-      <!-- Anweisungen -->
       <section class="recipe-instructions">
         <h3>Zubereitung</h3>
-        <div>${recipe.instructions}</div>
+        <div>${recipe.instructions.split("\n").join("<br>")}</div>
       </section>
 
       <!-- Löschen Button -->
