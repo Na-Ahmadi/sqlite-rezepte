@@ -102,7 +102,7 @@ export default function RecipeForm() {
         <label for="upload-image">Rezeptbild hochladen:</label>
         <input type="file" id="upload-image" name="upload_image" accept="image/*" />
         <!-- Vorschau-Bild -->
-        <!-- <img id="image-preview" src="" alt="Image preview" style="display:none; max-width:100px; margin-left:10px;" /> -->
+        <img id="image-preview" src="" alt="Image preview" style="display:none; max-width:100px; margin-left:10px;" />
       </div>
 
       <!-- Submit Button -->
@@ -116,7 +116,7 @@ export default function RecipeForm() {
   <!-- JavaScript for dynamic ingredient fields -->
   <script>
     /*------Image Preview -----*/
-    /* const uploadInput = document.getElementById("upload-image");
+     const uploadInput = document.getElementById("upload-image");
     const preview = document.getElementById("image-preview");
 
     uploadInput.addEventListener("change", (event) => {
@@ -132,7 +132,7 @@ export default function RecipeForm() {
         preview.style.display = "inline-block"; // Vorschau sichtbar machen
       };
       reader.readAsDataURL(file); // Bild als DataURL lesen
-  }); */
+  }); 
 
     <!-- Add Ingredient Function -->
     function addIngredient(){
