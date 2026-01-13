@@ -122,7 +122,6 @@ export default function RecipeForm() {
     const preview = document.getElementById("image-preview");
     const cancelBtn = document.getElementById("cancel-image");
 
-    // Funktion zum Zurücksetzen
       const resetUpload = () => {
         uploadInput.value = ""; 
         preview.src = ""; 
@@ -131,23 +130,24 @@ export default function RecipeForm() {
       };
 
     uploadInput.addEventListener("change", (event) => {
-      const file = event.target.files[0]; // erstes ausgewähltes Bild
-      if (!file) {
-        preview.style.display = "none";
+    const file = event.target.files[0];
+    if (!file) {
+        resetUpload();
         return;
-      }
+    }
 
-      const reader = new FileReader();
-      reader.onload = (e) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
         preview.src = e.target.result; 
         preview.style.display = "inline-block"; 
         cancelBtn.style.display = "inline-block"; 
+    };
+    reader.readAsDataURL(file); 
+});
 
-      };
-      reader.readAsDataURL(file); 
-      cancelBtn.addEventListener("click", (e) => {
+    cancelBtn.addEventListener("click", (e) => {
         e.preventDefault(); 
-      });
+        resetUpload();     
     });
 
     /*<!-- Add Ingredient Function -->*/
