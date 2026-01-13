@@ -118,7 +118,7 @@ export default function RecipeForm() {
   <!-- JavaScript for dynamic ingredient fields -->
   <script>
     /*------Image Preview -----*/
-     const uploadInput = document.getElementById("upload-image");
+    const uploadInput = document.getElementById("upload-image");
     const preview = document.getElementById("image-preview");
     const cancelBtn = document.getElementById("cancel-image");
 
@@ -148,8 +148,9 @@ export default function RecipeForm() {
       cancelBtn.addEventListener("click", (e) => {
         e.preventDefault(); 
       });
+    });
 
-    <!-- Add Ingredient Function -->
+    /*<!-- Add Ingredient Function -->*/
     function addIngredient(){
       const container = document.getElementById('ingredients-container');
       const index = container.children.length;
