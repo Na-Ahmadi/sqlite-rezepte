@@ -60,8 +60,6 @@ export default function RecipeForm() {
           </div>
           <div class="form-row">
             <div class="form-col">
-              <!-- <label for="ingredient-0-unit">Einheit:</label>
-              <input type="text" id="ingredient-0-unit" name="unit" placeholder="Einheit" required /> -->
               <label for="ingredient-0-unit">Einheit:</label>
               <select id="ingredient-0-unit" name="ingredients[0][unit]" required>
                 <option value="" disabled selected>Einheit:</option>
@@ -99,10 +97,12 @@ export default function RecipeForm() {
       </div>
 
       <div class="form-row">
-        <label for="upload-image">Rezeptbild hochladen:</label>
-        <input type="file" id="upload-image" name="upload_image" accept="image/*" />
-        <!-- Vorschau-Bild -->
-        <img id="image-preview" src="" alt="Image preview" style="display:none; max-width:100px; margin-left:10px;" />
+        <label for="upload-image" class="upload-box">
+          <span class="upload-icon">📷</span>
+          <span class="upload-text">Upload a file</span>
+          <input type="file" id="upload-image" name="upload_image" accept="image/*" />
+          <img id="image-preview" src="" alt="Image preview" style="display:none; max-width:100px; margin-left:10px;" />
+        </label>
       </div>
 
       <!-- Submit Button -->
