@@ -102,7 +102,9 @@ export default function RecipeForm() {
           <span class="upload-text">Upload a file</span>
           <input type="file" id="upload-image" name="upload_image" accept="image/*" />
           <img id="image-preview" src="" alt="Image preview" style="display:none; max-width:100px; margin-left:10px;" />
+          <button type="button" id="cancel-image" >✕</button>
         </label>
+
       </div>
 
       <!-- Submit Button -->
@@ -118,6 +120,15 @@ export default function RecipeForm() {
     /*------Image Preview -----*/
      const uploadInput = document.getElementById("upload-image");
     const preview = document.getElementById("image-preview");
+    const cancelBtn = document.getElementById("cancel-image");
+
+    // Funktion zum Zurücksetzen
+      const resetUpload = () => {
+        uploadInput.value = ""; 
+        preview.src = ""; 
+        preview.style.display = "none"; 
+        cancelBtn.style.display = "none"; 
+      };
 
     uploadInput.addEventListener("change", (event) => {
       const file = event.target.files[0]; // erstes ausgewähltes Bild
@@ -128,11 +139,15 @@ export default function RecipeForm() {
 
       const reader = new FileReader();
       reader.onload = (e) => {
-        preview.src = e.target.result; // Bildquelle setzen
-        preview.style.display = "inline-block"; // Vorschau sichtbar machen
+        preview.src = e.target.result; 
+        preview.style.display = "inline-block"; 
+        cancelBtn.style.display = "inline-block"; 
+
       };
-      reader.readAsDataURL(file); // Bild als DataURL lesen
-  }); 
+      reader.readAsDataURL(file); 
+      cancelBtn.addEventListener("click", (e) => {
+        e.preventDefault(); 
+      });
 
     <!-- Add Ingredient Function -->
     function addIngredient(){

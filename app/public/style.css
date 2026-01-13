@@ -562,3 +562,21 @@ textarea {
   height: 100%;
   object-fit: cover;
 }
+/* cancel button */
+#cancel-image {
+  display: flex;
+  display: none;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  height: 20px;
+  font-size: 12px;
+  line-height: 1;
+}
