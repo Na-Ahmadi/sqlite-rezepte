@@ -9,10 +9,11 @@ export default function Recipes({ recipes }) {
       <h1>Alle Rezepte</h1>
       <header class="recipes-header">
         <a href="/new-recipe" class="add-btn">Rezept hinzufügen</a>
-        <div class="recipe-search">
-          <input type="text" id="search-input" placeholder="Rezept suchen..." />
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" placeholder="Rezept suchen..." />
         </div>
-      
+
         <form method="GET" class="sort-form">
           <label for="sort">Sortieren nach:</label>
           <select name="sort" id="sort" onchange="this.form.submit()">    

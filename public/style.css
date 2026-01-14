@@ -88,7 +88,7 @@ body {
 }
 
 .recipe-card p {
-  margin-bottom: 10px;
+  margin-bottom: 2rem;
   color: var(--text-light);
   font-size: var(--font-sm);
 }
@@ -425,9 +425,43 @@ img {
   text-transform: uppercase;
 }
 
-.recipe-search {
+/* .recipe-search {
   flex-grow: 1;
   max-width: 300px;
+} */
+/* Suche */
+.search-wrapper {
+  position: relative;
+  flex: 0 1 400px;
+}
+
+.search-input {
+  transition: all 0.2s ease;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  background: #f8f9fa;
+  padding: 0.6rem 1rem 0.6rem 2.5rem;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+input.search-input {
+  padding-left: 2rem !important;
+}
+
+.search-input:focus {
+  outline: none;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.1);
+  border-color: var(--blue);
+  background: #fff;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: #adb5bd;
 }
 
 /* ------ Sortierformular --------- */
@@ -512,6 +546,16 @@ textarea {
   padding: 8px;
   width: 100%;
 }
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.1);
+  border-color: var(--blue);
+  background: #fff;
+}
 
 textarea {
   resize: vertical;
@@ -569,6 +613,7 @@ textarea {
 .toggle-btn,
 .add-btn {
   cursor: pointer;
+  margin-top: 0;
   margin-left: 10px;
   border: 1px solid #ccc;
   border-radius: var(--border-radius-sm);
