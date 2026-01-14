@@ -193,7 +193,8 @@ export default [
     pattern: new URLPattern({ pathname: "/*" }),
     handler: async (req, res) => {
       try {
-        const publicPath = join("public", req.url);
+        for(const folder of ['public', "database/uploads"]) {
+        const publicPath = join(folder, req.url);
         const stats = await stat(publicPath);
         if (stats.isFile()) {
           const ext = extname(publicPath);
@@ -203,7 +204,7 @@ export default [
           res.writeHead(200, { "Content-Type": mimeType });
           res.end(fileData);
           return true;
-        }
+        }}
       } catch (e) {
         // pass
       }

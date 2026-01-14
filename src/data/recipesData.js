@@ -1,6 +1,6 @@
 import { DatabaseSync } from "node:sqlite";
 
-const db = new DatabaseSync("recipes.db");
+const db = new DatabaseSync("/database/recipes.db");
 
 /**
  * @param {Object} recipe
