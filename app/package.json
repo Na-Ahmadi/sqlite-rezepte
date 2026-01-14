@@ -1,13 +1,13 @@
 {
-  "name": "frontend",
+  "name": "recipe-app",
   "type": "module",
   "scripts": {
     "start": "npx tsx --watch src/server.js"
   },
   "devDependencies": {
-    "@types/node": "24.10.1"
+    "@types/node": "25.10.1"
   },
   "dependencies": {
-    "formidable": "^3.5.4"
+    "formidable": "3.5.4"
   }
 }
