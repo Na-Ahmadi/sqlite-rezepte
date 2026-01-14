@@ -8,9 +8,9 @@ import Recipes from "./components/Recipes";
 import Template from "./components/Template";
 import {
   deleteRecipeById,
-  fetchAllRecipes,
-  getPostRecipe,
-  getRecipeById,
+  selectAllRecipes,
+  insertRecipe,
+  selectRecipeById,
 } from "./data/recipesData";
 
 const MIME_TYPES = {
@@ -44,7 +44,7 @@ export default [
     handler: async (req, res) => {
       const url = new URL(req.url, "http://localhost:3006");
       const sort = url.searchParams.get("sort") || "updated_desc";
-      const recipes = fetchAllRecipes(sort);
+      const recipes = selectAllRecipes(sort);
       sendJSON(res, recipes);
       return true;
     },
@@ -55,7 +55,7 @@ export default [
       const match = pattern.exec(req.url);
       if (match && match.pathname.groups.id) {
         const recipeId = match.pathname.groups.id;
-        const recipe = getRecipeById(recipeId);
+        const recipe = selectRecipeById(recipeId);
 
         if (recipe) {
           sendJSON(res, recipe);
@@ -140,7 +140,7 @@ export default [
           }
           const v = (x) => (Array.isArray(x) ? x[0] : x);
 
-          getPostRecipe({
+          insertRecipe({
             title: v(fields.title),
             description: v(fields.description),
             instructions: v(fields.instructions),

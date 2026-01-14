@@ -1,6 +1,6 @@
 import { DatabaseSync } from "node:sqlite";
 
-const db = new DatabaseSync("/database/recipes.db");
+const db = new DatabaseSync("./database/recipes.db");
 
 /**
  * @param {Object} recipe
@@ -22,7 +22,7 @@ const sortOptions = {
   title_desc: "title DESC",
 };
 
-export function fetchAllRecipes(sort = "updated_desc") {
+export function selectAllRecipes(sort = "updated_desc") {
   const orderBy = sortOptions[sort] || sortOptions.updated_desc;
 
   const recipes = db
@@ -40,7 +40,7 @@ export function fetchAllRecipes(sort = "updated_desc") {
  * @param {number|string} recipeId
  */
 // <------ Fetch a single recipe by its ID ------>
-export function getRecipeById(recipeId) {
+export function selectRecipeById(recipeId) {
   const recipe = db
     .prepare(
       "SELECT id, title, description, servings, prep_time, cook_time, total_time, created, updated, image_path, instructions  FROM recipes WHERE id = ?"
@@ -53,7 +53,7 @@ export function getRecipeById(recipeId) {
   return recipe;
 }
 // <------ add a new recipe to the database ------->
-export function getPostRecipe({
+export function insertRecipe({
   title,
   description,
   servings,
