@@ -5,7 +5,7 @@
     "start": "npx tsx --watch src/server.js"
   },
   "devDependencies": {
-    "@types/node": "25.10.1"
+    "@types/node": "25.0.8"
   },
   "dependencies": {
     "formidable": "3.5.4"
