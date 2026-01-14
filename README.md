@@ -21,7 +21,7 @@ Der Fokus liegt auf:
 ## 🧱 Verwendete Technologien
 
 - Node.js (reines `http`-Modul)
-- SQLite (lokale Datenbank)
+- SQLite3 (lokale Datenbank)
 - HTML & CSS
 - JavaScript (minimal, kein Client-Framework)
 - Keine externen Frameworks
@@ -35,6 +35,8 @@ Der Fokus liegt auf:
 - Rezepte erstellen
 - Zutaten und Zubereitung speichern
 - Bilder für Rezepte hochladen
+- Rezepte suchen (Search-Funktion)
+- Rezepte filtern über ein Dropdown-Menü
 - Speicherung in einer SQLite-Datenbank
 - Server-seitiges HTML-Rendering
 - Funktioniert auch ohne JavaScript im Browser
