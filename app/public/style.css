@@ -6,7 +6,6 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* Wrapper für die Rezepte */
 .recipes-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -14,7 +13,6 @@ body {
   margin-top: 20px;
 }
 
-/* Einzelne Recipe Card */
 .recipe-card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -32,6 +30,7 @@ body {
   display: flex;
   justify-content: space-between;
 }
+
 .recipe-card-time span:first-child {
   --tw-bg-opacity: 1;
   --tw-text-opacity: 1;

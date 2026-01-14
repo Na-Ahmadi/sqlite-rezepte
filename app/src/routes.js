@@ -38,6 +38,7 @@ const API_URL = "http://localhost:3006/api/recipes";
 
 /** @type {Route[]} */
 export default [
+  // <---------- API Routes --------------->
   {
     pattern: new URLPattern({ pathname: `/api/recipes` }),
     handler: async (req, res) => {
@@ -64,7 +65,7 @@ export default [
     },
   },
 
-  // ----------- frontend ------------------
+  // <---------- Home Route frontend--------------->
   {
     pattern: new URLPattern({ pathname: "/" }),
     handler: async (req, res) => {
@@ -100,6 +101,7 @@ export default [
       }
     },
   },
+  
   // <---------- Create New Recipe and POST --------------->
   {
     pattern: new URLPattern({ pathname: "/new-recipe" }),
@@ -136,7 +138,6 @@ export default [
           if (file && file.size > 0 && file.filepath) {
             imagePath = `/uploads/${path.basename(file.filepath)}`;
           }
-
           const v = (x) => (Array.isArray(x) ? x[0] : x);
 
           getPostRecipe({
@@ -166,7 +167,8 @@ export default [
       return true;
     },
   },
-  // <-- Delete Recipe -->
+  
+  // <---------- Delete Recipe --------------->
   {
     pattern: new URLPattern({ pathname: "/delete-recipe/:id" }),
     handler: async (req, res, pattern) => {
@@ -187,6 +189,7 @@ export default [
 
   // <------------ public folder routes ----------->
   {
+    // Static Files Route
     pattern: new URLPattern({ pathname: "/*" }),
     handler: async (req, res) => {
       try {
@@ -207,6 +210,7 @@ export default [
     },
   },
   {
+    // 404 Not Found - Fallback Route
     pattern: new URLPattern({ pathname: "/*" }),
     handler: async (req, res) => {
       sendHtml(
@@ -221,6 +225,7 @@ export default [
   },
 ];
 
+// <-------- Hilfsfunktionen --------->
 /** Send a JSON response */
 function sendJSON(res, data) {
   res.writeHead(200, { "Contetn-Type": "application/json" });
@@ -234,7 +239,6 @@ function sendHtml(res, htmlContent) {
 }
 
 // -------- parseIngredients ---------
-
 function parseIngredients(fields) {
   const ingredients = [];
   const v = (x) => (Array.isArray(x) ? x[0] : x);

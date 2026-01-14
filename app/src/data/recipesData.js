@@ -39,6 +39,7 @@ export function fetchAllRecipes(sort = "updated_desc") {
 /**
  * @param {number|string} recipeId
  */
+// <------ Fetch a single recipe by its ID ------>
 export function getRecipeById(recipeId) {
   const recipe = db
     .prepare(
@@ -51,7 +52,7 @@ export function getRecipeById(recipeId) {
   addIngredientsToRecipe(recipe);
   return recipe;
 }
-// <-- add a new recipe to the database -->
+// <------ add a new recipe to the database ------->
 export function getPostRecipe({
   title,
   description,
