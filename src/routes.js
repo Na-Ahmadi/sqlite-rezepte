@@ -38,32 +38,6 @@ const API_URL = "http://localhost:3006/api/recipes";
 
 /** @type {Route[]} */
 export default [
-  // <---------- API Routes --------------->
-  {
-    pattern: new URLPattern({ pathname: `/api/recipes` }),
-    handler: async (req, res) => {
-      const url = new URL(req.url, "http://localhost:3006");
-      const sort = url.searchParams.get("sort") || "updated_desc";
-      const recipes = selectAllRecipes(sort);
-      sendJSON(res, recipes);
-      return true;
-    },
-  },
-  {
-    pattern: new URLPattern({ pathname: `/api/recipes/:id` }),
-    handler: async (req, res, pattern) => {
-      const match = pattern.exec(req.url);
-      if (match && match.pathname.groups.id) {
-        const recipeId = match.pathname.groups.id;
-        const recipe = selectRecipeById(recipeId);
-
-        if (recipe) {
-          sendJSON(res, recipe);
-          return true;
-        }
-      }
-    },
-  },
 
   // <---------- Home Route frontend--------------->
   {
@@ -72,8 +46,10 @@ export default [
       const url = new URL(req.url, "http://localhost:3006");
       const sort = url.searchParams.get("sort") || "updated_desc";
 
-      const response = await fetch(`${API_URL}?sort=${sort}`);
-      const recipes = await response.json();
+      // const response = await fetch(`${API_URL}?sort=${sort}`);
+      // const recipes = await response.json();
+          const recipes = selectAllRecipes(sort);
+
 
       sendHtml(
         res,
@@ -86,11 +62,14 @@ export default [
     pattern: new URLPattern({ pathname: "/recipes/:id" }),
     handler: async (req, res, pattern) => {
       const match = pattern.exec(req.url);
+
       if (match) {
         const recipeId = match.pathname.groups.id;
-        const response = await fetch(`${API_URL}/${recipeId}`);
-        if (response.status === 200) {
-          const recipe = await response.json();
+        // const response = await fetch(`${API_URL}/${recipeId}`);
+              const recipe = selectRecipeById(recipeId);
+
+        if (recipe) {
+          // const recipe = await response.json();
 
           sendHtml(
             res,
