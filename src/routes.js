@@ -8,8 +8,8 @@ import Recipes from "./components/Recipes";
 import Template from "./components/Template";
 import {
   deleteRecipeById,
-  selectAllRecipes,
   insertRecipe,
+  selectAllRecipes,
   selectRecipeById,
 } from "./data/recipesData";
 
@@ -101,7 +101,7 @@ export default [
       }
     },
   },
-  
+
   // <---------- Create New Recipe and POST --------------->
   {
     pattern: new URLPattern({ pathname: "/new-recipe" }),
@@ -167,7 +167,7 @@ export default [
       return true;
     },
   },
-  
+
   // <---------- Delete Recipe --------------->
   {
     pattern: new URLPattern({ pathname: "/delete-recipe/:id" }),
@@ -192,21 +192,22 @@ export default [
     // Static Files Route
     pattern: new URLPattern({ pathname: "/*" }),
     handler: async (req, res) => {
-      try {
-        for(const folder of ['public', "database/uploads"]) {
-        const publicPath = join(folder, req.url);
-        const stats = await stat(publicPath);
-        if (stats.isFile()) {
-          const ext = extname(publicPath);
-          const mimeType = MIME_TYPES[ext] || "application/octet-stream";
-          const fileData = await readFile(publicPath);
+      for (const folder of ["public", "database"]) {
+        try {
+          const publicPath = join(folder, req.url);
+          const stats = await stat(publicPath);
+          if (stats.isFile()) {
+            const ext = extname(publicPath);
+            const mimeType = MIME_TYPES[ext] || "application/octet-stream";
+            const fileData = await readFile(publicPath);
 
-          res.writeHead(200, { "Content-Type": mimeType });
-          res.end(fileData);
-          return true;
-        }}
-      } catch (e) {
-        // pass
+            res.writeHead(200, { "Content-Type": mimeType });
+            res.end(fileData);
+            return true;
+          }
+        } catch (e) {
+          // pass
+        }
       }
     },
   },
