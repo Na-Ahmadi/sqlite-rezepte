@@ -38,18 +38,13 @@ const API_URL = "http://localhost:3006/api/recipes";
 
 /** @type {Route[]} */
 export default [
-
   // <---------- Home Route frontend--------------->
   {
     pattern: new URLPattern({ pathname: "/" }),
     handler: async (req, res) => {
       const url = new URL(req.url, "http://localhost:3006");
       const sort = url.searchParams.get("sort") || "updated_desc";
-
-      // const response = await fetch(`${API_URL}?sort=${sort}`);
-      // const recipes = await response.json();
-          const recipes = selectAllRecipes(sort);
-
+      const recipes = selectAllRecipes(sort);
 
       sendHtml(
         res,
@@ -65,12 +60,9 @@ export default [
 
       if (match) {
         const recipeId = match.pathname.groups.id;
-        // const response = await fetch(`${API_URL}/${recipeId}`);
-              const recipe = selectRecipeById(recipeId);
+        const recipe = selectRecipeById(recipeId);
 
         if (recipe) {
-          // const recipe = await response.json();
-
           sendHtml(
             res,
             Template({ title: recipe.title, content: Ingredients({ recipe }) })
