@@ -29,7 +29,7 @@ export default function Ingredients({ recipe }) {
     <article class="recipe-detail">
       <!-- Zurück Button -->
       <div class="recipe-btn-container">
-        <a href="/" class="back-btn">⬅ Zurück zu den Rezepten</a>
+        <a href="/" class="back-button">⬅ Zurück zu den Rezepten</a>
       </div>
       <div class="recipe-detail-image">
         ${recipe.image_path

@@ -4,7 +4,7 @@ export default function RecipeForm() {
   return /* html */ `
   <div class="form-section">
     <div class="form-header">
-      <a href="/" class="back-btn">⬅ Zurück zu den Rezepten</a>
+      <a href="/" class="back-button">⬅ Zurück zu den Rezepten</a>
       <h1 class="form-title">Neues Rezept erstellen</h1>
     </div>
 
